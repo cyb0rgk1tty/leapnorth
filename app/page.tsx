@@ -86,7 +86,7 @@ export default function Home() {
             </div>
             <div>
               <div className="text-5xl md:text-6xl font-bold text-primary mb-2">
-                <NumberCounter end={10} suffix="+" />
+                <NumberCounter end={15} suffix="+" />
               </div>
               <p className="text-muted-foreground">Years of Experience</p>
             </div>

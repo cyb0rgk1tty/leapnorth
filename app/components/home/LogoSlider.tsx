@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const companies = [
   { name: "Intel", slug: "intel" },
@@ -55,57 +56,28 @@ export function LogoSlider() {
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
 
         {/* Sliding logos container with two identical sets */}
-        <div className="slider-container">
-          <div className="slider-track">
-            <div className="slider-content">
-              <LogoSet />
-            </div>
-            <div className="slider-content" aria-hidden="true">
-              <LogoSet />
-            </div>
+        <motion.div
+          className="flex gap-16"
+          initial={{ x: 0 }}
+          animate={{ x: "-50%" }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear",
+            repeatType: "loop",
+          }}
+          style={{
+            width: "max-content",
+          }}
+        >
+          <div className="flex gap-16 items-center flex-shrink-0">
+            <LogoSet />
           </div>
-        </div>
+          <div className="flex gap-16 items-center flex-shrink-0">
+            <LogoSet />
+          </div>
+        </motion.div>
       </div>
-
-      <style jsx>{`
-        .slider-container {
-          width: 100%;
-          overflow: hidden;
-        }
-
-        .slider-track {
-          display: flex;
-          gap: 4rem;
-          width: max-content;
-          animation: scroll 30s linear infinite;
-        }
-
-        .slider-content {
-          display: flex;
-          gap: 4rem;
-          align-items: center;
-          flex-shrink: 0;
-        }
-
-        @keyframes scroll {
-          0% {
-            transform: translate3d(0, 0, 0);
-          }
-          100% {
-            transform: translate3d(-50%, 0, 0);
-          }
-        }
-
-        .slider-track:hover {
-          animation-play-state: paused;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .slider-track {
-            animation: none;
-          }
-        }
-      `}</style>
     </div>
   );
 }
