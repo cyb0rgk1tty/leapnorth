@@ -26,6 +26,7 @@ export class ParticleSystem {
   private cursorX: number = 0;
   private cursorY: number = 0;
   private cursorActive: boolean = false;
+  private cursorVelocity: number = 0;
   private config: typeof PARTICLE_CONFIG.desktop | typeof PARTICLE_CONFIG.tablet | typeof PARTICLE_CONFIG.mobile;
   private primaryColor: { r: number; g: number; b: number };
   private secondaryColor: { r: number; g: number; b: number };
@@ -80,12 +81,13 @@ export class ParticleSystem {
   }
 
   /**
-   * Update cursor position
+   * Update cursor position and velocity
    */
-  public setCursor(x: number, y: number, active: boolean): void {
+  public setCursor(x: number, y: number, active: boolean, velocity: number = 0): void {
     this.cursorX = x;
     this.cursorY = y;
     this.cursorActive = active;
+    this.cursorVelocity = velocity;
   }
 
   /**
@@ -107,8 +109,11 @@ export class ParticleSystem {
           const force = Math.pow((cursorRadius - dist) / cursorRadius, 2);
           const angle = Math.atan2(particle.y - this.cursorY, particle.x - this.cursorX);
 
-          particle.vx += Math.cos(angle) * force * repulsionStrength;
-          particle.vy += Math.sin(angle) * force * repulsionStrength;
+          // Velocity multiplier: faster cursor = stronger push (clamped to 1-5x)
+          const velocityMultiplier = Math.min(1 + (this.cursorVelocity / 50), 5);
+
+          particle.vx += Math.cos(angle) * force * repulsionStrength * velocityMultiplier;
+          particle.vy += Math.sin(angle) * force * repulsionStrength * velocityMultiplier;
 
           // Alpha boost when being repelled
           particle.alpha = lerp(particle.alpha, hoverAlpha, 0.15);

@@ -12,6 +12,9 @@ export class CursorInteraction {
   private particleSystem: ParticleSystem;
   private cursorX: number = 0;
   private cursorY: number = 0;
+  private prevCursorX: number = 0;
+  private prevCursorY: number = 0;
+  private cursorVelocity: number = 0;
   private isActive: boolean = false;
   private isTouchDevice: boolean = false;
 
@@ -79,8 +82,18 @@ export class CursorInteraction {
    */
   private handleMouseMove(e: MouseEvent): void {
     const rect = this.canvas.getBoundingClientRect();
-    this.cursorX = e.clientX - rect.left;
-    this.cursorY = e.clientY - rect.top;
+    const newX = e.clientX - rect.left;
+    const newY = e.clientY - rect.top;
+
+    // Calculate cursor velocity
+    const dx = newX - this.cursorX;
+    const dy = newY - this.cursorY;
+    this.cursorVelocity = Math.sqrt(dx * dx + dy * dy);
+
+    this.prevCursorX = this.cursorX;
+    this.prevCursorY = this.cursorY;
+    this.cursorX = newX;
+    this.cursorY = newY;
     this.updateParticleSystem();
   }
 
@@ -124,8 +137,18 @@ export class CursorInteraction {
     if (e.touches.length > 0) {
       const touch = e.touches[0];
       const rect = this.canvas.getBoundingClientRect();
-      this.cursorX = touch.clientX - rect.left;
-      this.cursorY = touch.clientY - rect.top;
+      const newX = touch.clientX - rect.left;
+      const newY = touch.clientY - rect.top;
+
+      // Calculate cursor velocity
+      const dx = newX - this.cursorX;
+      const dy = newY - this.cursorY;
+      this.cursorVelocity = Math.sqrt(dx * dx + dy * dy);
+
+      this.prevCursorX = this.cursorX;
+      this.prevCursorY = this.cursorY;
+      this.cursorX = newX;
+      this.cursorY = newY;
       this.updateParticleSystem();
     }
   }
@@ -139,10 +162,10 @@ export class CursorInteraction {
   }
 
   /**
-   * Update particle system with current cursor position
+   * Update particle system with current cursor position and velocity
    */
   private updateParticleSystem(): void {
-    this.particleSystem.setCursor(this.cursorX, this.cursorY, this.isActive);
+    this.particleSystem.setCursor(this.cursorX, this.cursorY, this.isActive, this.cursorVelocity);
   }
 
   /**
