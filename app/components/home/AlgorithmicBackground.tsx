@@ -14,6 +14,7 @@ import { debounce } from "./algorithmic/utils";
  */
 export function AlgorithmicBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const particleSystemRef = useRef<ParticleSystem | null>(null);
   const cursorInteractionRef = useRef<CursorInteraction | null>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -82,8 +83,11 @@ export function AlgorithmicBackground() {
     particleSystemRef.current = new ParticleSystem(canvas, config);
     particleSystemRef.current.resize(rect.width, rect.height);
 
-    // Create cursor interaction handler
-    cursorInteractionRef.current = new CursorInteraction(canvas, particleSystemRef.current);
+    // Create cursor interaction handler (listen on container, not canvas)
+    const container = containerRef.current || canvas.parentElement;
+    if (container) {
+      cursorInteractionRef.current = new CursorInteraction(container as HTMLElement, particleSystemRef.current, canvas);
+    }
 
     // Animation loop
     let lastFrameTime = 0;

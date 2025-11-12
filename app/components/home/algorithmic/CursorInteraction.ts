@@ -7,6 +7,7 @@ import { ParticleSystem } from './ParticleSystem';
 import { throttle } from './utils';
 
 export class CursorInteraction {
+  private container: HTMLElement;
   private canvas: HTMLCanvasElement;
   private particleSystem: ParticleSystem;
   private cursorX: number = 0;
@@ -22,8 +23,9 @@ export class CursorInteraction {
   private boundHandleTouchMove: (e: TouchEvent) => void;
   private boundHandleTouchEnd: () => void;
 
-  constructor(canvas: HTMLCanvasElement, particleSystem: ParticleSystem) {
-    this.canvas = canvas;
+  constructor(container: HTMLElement, particleSystem: ParticleSystem, canvas?: HTMLCanvasElement) {
+    this.container = container;
+    this.canvas = canvas || container as HTMLCanvasElement;
     this.particleSystem = particleSystem;
     this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
@@ -44,15 +46,15 @@ export class CursorInteraction {
   private attachListeners(): void {
     if (this.isTouchDevice) {
       // Touch events for mobile
-      this.canvas.addEventListener('touchstart', this.boundHandleTouchStart, { passive: true });
-      this.canvas.addEventListener('touchmove', this.boundHandleTouchMove, { passive: true });
-      this.canvas.addEventListener('touchend', this.boundHandleTouchEnd);
-      this.canvas.addEventListener('touchcancel', this.boundHandleTouchEnd);
+      this.container.addEventListener('touchstart', this.boundHandleTouchStart, { passive: true });
+      this.container.addEventListener('touchmove', this.boundHandleTouchMove, { passive: true });
+      this.container.addEventListener('touchend', this.boundHandleTouchEnd);
+      this.container.addEventListener('touchcancel', this.boundHandleTouchEnd);
     } else {
       // Mouse events for desktop
-      this.canvas.addEventListener('mousemove', this.boundHandleMouseMove);
-      this.canvas.addEventListener('mouseenter', this.boundHandleMouseEnter);
-      this.canvas.addEventListener('mouseleave', this.boundHandleMouseLeave);
+      this.container.addEventListener('mousemove', this.boundHandleMouseMove);
+      this.container.addEventListener('mouseenter', this.boundHandleMouseEnter);
+      this.container.addEventListener('mouseleave', this.boundHandleMouseLeave);
     }
   }
 
@@ -61,14 +63,14 @@ export class CursorInteraction {
    */
   public detachListeners(): void {
     if (this.isTouchDevice) {
-      this.canvas.removeEventListener('touchstart', this.boundHandleTouchStart);
-      this.canvas.removeEventListener('touchmove', this.boundHandleTouchMove);
-      this.canvas.removeEventListener('touchend', this.boundHandleTouchEnd);
-      this.canvas.removeEventListener('touchcancel', this.boundHandleTouchEnd);
+      this.container.removeEventListener('touchstart', this.boundHandleTouchStart);
+      this.container.removeEventListener('touchmove', this.boundHandleTouchMove);
+      this.container.removeEventListener('touchend', this.boundHandleTouchEnd);
+      this.container.removeEventListener('touchcancel', this.boundHandleTouchEnd);
     } else {
-      this.canvas.removeEventListener('mousemove', this.boundHandleMouseMove);
-      this.canvas.removeEventListener('mouseenter', this.boundHandleMouseEnter);
-      this.canvas.removeEventListener('mouseleave', this.boundHandleMouseLeave);
+      this.container.removeEventListener('mousemove', this.boundHandleMouseMove);
+      this.container.removeEventListener('mouseenter', this.boundHandleMouseEnter);
+      this.container.removeEventListener('mouseleave', this.boundHandleMouseLeave);
     }
   }
 
