@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const companies = [
   { name: "Intel", slug: "intel" },
@@ -40,7 +41,7 @@ function LogoSet() {
             className={
               company.slug === 'pandora' || company.slug === 'canadian-cancer-society' || company.slug === 'mederma'
                 ? 'h-10 object-contain'
-                : company.slug === 'vertex-pharmaceuticals' || company.slug === 'google' || company.slug === 'rogers' || company.slug === 'bmw'
+                : company.slug === 'vertex-pharmaceuticals' || company.slug === 'google' || company.slug === 'rogers' || company.slug === 'bmw' || company.slug === 'intel'
                 ? 'h-14 object-contain'
                 : 'h-12 object-contain'
             }
@@ -48,7 +49,7 @@ function LogoSet() {
               width: 'auto',
               height: company.slug === 'pandora' || company.slug === 'canadian-cancer-society' || company.slug === 'mederma'
                 ? '2.5rem'
-                : company.slug === 'vertex-pharmaceuticals' || company.slug === 'google' || company.slug === 'rogers' || company.slug === 'bmw'
+                : company.slug === 'vertex-pharmaceuticals' || company.slug === 'google' || company.slug === 'rogers' || company.slug === 'bmw' || company.slug === 'intel'
                 ? '3.5rem'
                 : '3rem'
             }}
@@ -60,6 +61,21 @@ function LogoSet() {
 }
 
 export function LogoSlider() {
+  const controls = useAnimationControls();
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    controls.start({
+      x: "-50%",
+      transition: {
+        duration: isHovered ? 90 : 30,
+        repeat: Infinity,
+        ease: "linear",
+        repeatType: "loop",
+      },
+    });
+  }, [isHovered, controls]);
+
   return (
     <div className="w-full py-12 overflow-hidden border-t border-border/50">
       <div className="max-w-7xl mx-auto px-4 mb-6">
@@ -68,22 +84,20 @@ export function LogoSlider() {
         </p>
       </div>
 
-      <div className="relative">
+      <div
+        className="relative"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         {/* Gradient overlays for fade effect */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
         {/* Sliding logos container with two identical sets */}
         <motion.div
           className="flex gap-16"
           initial={{ x: 0 }}
-          animate={{ x: "-50%" }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear",
-            repeatType: "loop",
-          }}
+          animate={controls}
           style={{
             width: "max-content",
           }}
