@@ -103,8 +103,8 @@ export class ParticleSystem {
 
         // Repulsion zone - push particles away when cursor is close
         if (dist < repulsionRadius && dist > 0) {
-          // Smooth force curve for fluid motion
-          const force = Math.pow((repulsionRadius - dist) / repulsionRadius, 1.5);
+          // Very smooth force curve for ultra-fluid motion (exponential falloff)
+          const force = Math.pow((repulsionRadius - dist) / repulsionRadius, 2.5);
           const angle = Math.atan2(particle.y - this.cursorY, particle.x - this.cursorX); // Reversed for repulsion
 
           particle.vx += Math.cos(angle) * force * repulsionStrength;
@@ -140,9 +140,9 @@ export class ParticleSystem {
       particle.x += particle.vx;
       particle.y += particle.vy;
 
-      // Apply friction (higher for smoother, more fluid movement)
-      particle.vx *= 0.92;
-      particle.vy *= 0.92;
+      // Apply high friction for very smooth, fluid movement
+      particle.vx *= 0.88;
+      particle.vy *= 0.88;
 
       // Ensure minimum speed (particles shouldn't stop completely)
       const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
