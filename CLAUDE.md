@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Agency Name:** Leap North
 **Tagline:** "True North. True Growth."
-**Status:** Planning Phase Complete - Ready to Build
+**Status:** Production Ready - Deployed
 **Target:** 95+ Lighthouse score, sub-2-second load times, WCAG 2.1 AA accessibility
 
 ---
@@ -95,25 +95,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Primary Colors:**
 - Background: `#0a0a0a` (deep black)
 - Foreground: `#f5f5f5` (off-white)
-- Primary Accent: `#0EA5E9` (electric blue - LeftClick AI inspired)
-- Primary Hover: `#0284C7` (darker blue)
-- Primary Light: `#38BDF8` (lighter blue for accents)
-- Cyan Accent: `#06B6D4` (secondary CTAs)
+- Primary Accent: `#DC143C` (crimson red - Canadian theme)
+- Primary Hover: `#B01030` (dark crimson)
+- Primary Light: `#E84A5F` (light crimson for accents/glow)
 - Secondary: `#1a1a1a` (slightly lighter black)
 - Border: `#2a2a2a`
 
-**Theme Preset:** Slate or Zinc (from shadcn/ui themes)
+**Theme Preset:** Zinc (from shadcn/ui themes)
 
 **Complete CSS Variables:**
 ```css
 --background: #0a0a0a;
 --foreground: #f5f5f5;
---primary: #0EA5E9;           /* Electric blue */
+--primary: #DC143C;           /* Crimson red */
 --primary-foreground: #ffffff;
 --secondary: #1a1a1a;
 --accent: #2a2a2a;
 --border: #2a2a2a;
---ring: #0EA5E9;              /* Focus rings */
+--ring: #DC143C;              /* Focus rings */
 ```
 
 ### Typography System
@@ -157,6 +156,38 @@ import { fadeInUp } from "@/lib/animations/variants";
 >
   {children}
 </motion.div>
+```
+
+### Custom Particle System
+
+**Interactive Canvas Background** (Hero Section):
+Located in `/app/components/home/algorithmic/`:
+- `AlgorithmicBackground.tsx` - Main component orchestrator
+- `ParticleSystem.ts` - Core physics engine with 40-100 particles
+- `CursorInteraction.ts` - Mouse/touch tracking with velocity calculation
+- `config.ts` - Device-specific configuration (desktop/tablet/mobile)
+- `utils.ts` - Math utilities (distance, lerp, clamp, etc.)
+
+**Features:**
+- Crimson red particles with fluid repulsion physics
+- Document-wide cursor tracking (works even over content)
+- Velocity-based force (faster cursor = stronger push, 1-6x multiplier)
+- Particle-to-particle connection lines that brighten near cursor
+- Alpha boost for particles near cursor
+- Adaptive quality based on device (100/60/40 particles)
+- IntersectionObserver for pausing when off-screen
+- Smooth friction (0.86) for long drift trails
+- 60 FPS target with requestAnimationFrame
+- Respects prefers-reduced-motion
+- No pointer-events blocking (content remains interactive)
+
+**Configuration (Optimized for Subtle Repulsion):**
+```typescript
+cursorRadius: 450px (desktop)
+repulsionStrength: 0.65 (30% increase from default)
+friction: 0.86 (allows longer particle drift)
+forceExponent: 1.8 (smoother acceleration curve)
+velocityMultiplier: 1-6x (responsive to cursor speed)
 ```
 
 ### Component Strategy
@@ -379,17 +410,20 @@ All comprehensive guides are in `/planning/`:
 ## Important Notes
 
 ### Project Status
-**Planning Phase Complete** - No code exists yet. All architecture, tech stack, and design decisions have been finalized:
+**Production Ready** - Website is fully built and deployed:
 
-**Branding Finalized:**
+**Completed:**
 - ✅ Agency Name: **Leap North**
 - ✅ Tagline: **"True North. True Growth."**
-- ✅ Primary Color: **Electric Blue (#0EA5E9)**
-- ✅ Dark Theme: Black background (#0a0a0a) with blue accents
-- ⏳ Logo: To be AI-generated in Phase 5
-- ⏳ Content: To be generated during build (realistic placeholder content)
-
-**Ready to Build:** All technical decisions made, content will be generated during development.
+- ✅ Primary Color: **Crimson Red (#DC143C)** - Updated from Electric Blue
+- ✅ Dark Theme: Black background (#0a0a0a) with crimson red accents
+- ✅ Logo: Optimized PNG/SVG logo with favicon support
+- ✅ Content: Complete with 3 blog posts, 4 case studies, realistic content
+- ✅ Contact Form: API integration with Resend email service
+- ✅ SEO: Sitemap, robots.txt, JSON-LD structured data
+- ✅ Performance: Phase 1 optimizations complete (WebP images, lazy loading, code splitting)
+- ✅ Custom Particle System: Interactive crimson red particle background with cursor repulsion
+- ✅ Brand Logos: 17 major brand partnerships displayed (Intel, Google, BMW, Rogers, etc.)
 
 ### Implementation Order
 1. Initialize Next.js 14+ with TypeScript

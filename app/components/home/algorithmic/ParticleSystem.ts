@@ -105,13 +105,13 @@ export class ParticleSystem {
 
         // Push particles away when cursor is nearby (fluid repulsion only)
         if (dist < cursorRadius && dist > 0) {
-          // Very smooth force curve for ultra-fluid motion
+          // Very smooth force curve for ultra-fluid motion (1.8 for smoother acceleration)
           const distanceRatio = (cursorRadius - dist) / cursorRadius;
-          const force = Math.pow(distanceRatio, 2);
+          const force = Math.pow(distanceRatio, 1.8);
           const angle = Math.atan2(particle.y - this.cursorY, particle.x - this.cursorX);
 
-          // Velocity multiplier: faster cursor = stronger push (clamped to 1-5x)
-          const velocityMultiplier = Math.max(1, Math.min(1 + (this.cursorVelocity / 50), 5));
+          // Velocity multiplier: faster cursor = stronger push (clamped to 1-6x)
+          const velocityMultiplier = Math.max(1, Math.min(1 + (this.cursorVelocity / 50), 6));
 
           const finalForce = force * repulsionStrength * velocityMultiplier;
 
@@ -134,9 +134,9 @@ export class ParticleSystem {
       particle.x += particle.vx;
       particle.y += particle.vy;
 
-      // Apply high friction for very smooth, fluid movement
-      particle.vx *= 0.88;
-      particle.vy *= 0.88;
+      // Apply high friction for very smooth, fluid movement (0.86 for slightly longer drift)
+      particle.vx *= 0.86;
+      particle.vy *= 0.86;
 
       // Ensure minimum speed (particles shouldn't stop completely)
       const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);

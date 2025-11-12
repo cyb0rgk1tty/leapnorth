@@ -114,10 +114,15 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center text-base text-muted-foreground">
           <p>&copy; {currentYear} Leap North Company. All rights reserved.</p>
           <div className="flex items-center gap-2 my-4 md:my-0">
-            <svg className="w-6 h-4" viewBox="0 0 640 480" aria-label="Canadian Flag">
-              <path fill="#fff" d="M0 0h640v480H0z"/>
-              <path fill="#d52b1e" d="M0 0h213.3v480H0zm426.7 0h213.3v480H426.7z"/>
-              <path fill="#d52b1e" d="m318 139.5-26.5 191.2 25-8.3-10 25 35-17.5-7.5 25.8h17.5l-7.5-25.8 35 17.5-10-25 25 8.3-26.5-191.2z"/>
+            <svg className="w-8 h-5" viewBox="0 0 1000 500" aria-label="Canadian Flag" style={{ display: 'inline-block' }}>
+              {/* Red left band */}
+              <rect x="0" y="0" width="250" height="500" fill="#d52b1e"/>
+              {/* White center */}
+              <rect x="250" y="0" width="500" height="500" fill="#ffffff"/>
+              {/* Red right band */}
+              <rect x="750" y="0" width="250" height="500" fill="#d52b1e"/>
+              {/* Red maple leaf in center */}
+              <path fill="#d52b1e" d="M 500,125 L 475,225 L 500,215 L 490,240 L 525,222.5 L 517.5,247.5 L 535,247.5 L 527.5,222.5 L 562.5,240 L 552.5,215 L 577.5,225 L 552.5,125 L 537.5,175 L 525,150 L 512.5,175 L 500,125 Z M 500,250 L 480,280 L 465,265 L 450,290 L 465,305 L 445,325 L 460,345 L 475,330 L 490,355 L 500,345 L 510,355 L 525,330 L 540,345 L 555,325 L 535,305 L 550,290 L 535,265 L 520,280 L 500,250 Z"/>
             </svg>
             <span className="font-semibold">Proudly Canadian</span>
           </div>

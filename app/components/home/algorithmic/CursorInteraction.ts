@@ -105,6 +105,12 @@ export class CursorInteraction {
     const newX = e.clientX - rect.left;
     const newY = e.clientY - rect.top;
 
+    // Check if cursor is within bounds (when using document listener)
+    if (this.useDocumentListener) {
+      const isInBounds = newX >= 0 && newX <= rect.width && newY >= 0 && newY <= rect.height;
+      this.isActive = isInBounds;
+    }
+
     // Calculate cursor velocity
     const dx = newX - this.cursorX;
     const dy = newY - this.cursorY;

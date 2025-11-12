@@ -40,7 +40,7 @@ function LogoSet() {
             className={
               company.slug === 'pandora' || company.slug === 'canadian-cancer-society' || company.slug === 'mederma'
                 ? 'h-10 object-contain'
-                : company.slug === 'vertex-pharmaceuticals'
+                : company.slug === 'vertex-pharmaceuticals' || company.slug === 'google' || company.slug === 'rogers' || company.slug === 'bmw'
                 ? 'h-14 object-contain'
                 : 'h-12 object-contain'
             }
@@ -48,7 +48,7 @@ function LogoSet() {
               width: 'auto',
               height: company.slug === 'pandora' || company.slug === 'canadian-cancer-society' || company.slug === 'mederma'
                 ? '2.5rem'
-                : company.slug === 'vertex-pharmaceuticals'
+                : company.slug === 'vertex-pharmaceuticals' || company.slug === 'google' || company.slug === 'rogers' || company.slug === 'bmw'
                 ? '3.5rem'
                 : '3rem'
             }}

@@ -8,7 +8,7 @@ export const PARTICLE_CONFIG = {
   desktop: {
     particleCount: 100,
     connectionDistance: 150,
-    cursorRadius: 400,   // Large radius for dramatic attraction
+    cursorRadius: 450,   // Increased for wider influence zone
   },
   tablet: {
     particleCount: 60,
@@ -52,7 +52,7 @@ export const PARTICLE_CONFIG = {
     attractionRadius: 200,         // Not used (no attraction)
     attractionStrength: 0,         // No attraction
     repulsionRadius: 80,           // Not used
-    repulsionStrength: 0.5,        // Increased for more noticeable push
+    repulsionStrength: 0.65,       // Subtle 30% increase for more noticeable push
     speedMultiplier: 1.5,
     colorShiftIntensity: 0.3,
   },
