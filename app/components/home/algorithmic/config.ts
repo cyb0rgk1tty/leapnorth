@@ -52,7 +52,7 @@ export const PARTICLE_CONFIG = {
     attractionRadius: 200,         // Not used (no attraction)
     attractionStrength: 0,         // No attraction
     repulsionRadius: 80,           // Not used
-    repulsionStrength: 0.25,       // Gentle push - particles flow away smoothly
+    repulsionStrength: 0.5,        // Increased for more noticeable push
     speedMultiplier: 1.5,
     colorShiftIntensity: 0.3,
   },

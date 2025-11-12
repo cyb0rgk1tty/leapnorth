@@ -106,17 +106,21 @@ export class ParticleSystem {
         // Push particles away when cursor is nearby (fluid repulsion only)
         if (dist < cursorRadius && dist > 0) {
           // Very smooth force curve for ultra-fluid motion
-          const force = Math.pow((cursorRadius - dist) / cursorRadius, 2);
+          const distanceRatio = (cursorRadius - dist) / cursorRadius;
+          const force = Math.pow(distanceRatio, 2);
           const angle = Math.atan2(particle.y - this.cursorY, particle.x - this.cursorX);
 
           // Velocity multiplier: faster cursor = stronger push (clamped to 1-5x)
           const velocityMultiplier = Math.max(1, Math.min(1 + (this.cursorVelocity / 50), 5));
 
-          particle.vx += Math.cos(angle) * force * repulsionStrength * velocityMultiplier;
-          particle.vy += Math.sin(angle) * force * repulsionStrength * velocityMultiplier;
+          const finalForce = force * repulsionStrength * velocityMultiplier;
 
-          // Alpha boost when being repelled
-          particle.alpha = lerp(particle.alpha, hoverAlpha, 0.15);
+          particle.vx += Math.cos(angle) * finalForce;
+          particle.vy += Math.sin(angle) * finalForce;
+
+          // Alpha boost when being repelled (stronger when closer)
+          const alphaBoost = lerp(baseAlpha, hoverAlpha, distanceRatio);
+          particle.alpha = lerp(particle.alpha, alphaBoost, 0.2);
         } else {
           // Return to base alpha
           particle.alpha = lerp(particle.alpha, baseAlpha, 0.05);
