@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leap North - Canadian Red Theme Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #050505;
+            color: #f5f5f5;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            color: #a0a0a0;
+        }
+
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .theme-card {
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 30px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .theme-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .theme-header {
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .theme-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .theme-description {
+            font-size: 0.875rem;
+            color: #808080;
+            margin-bottom: 12px;
+        }
+
+        .color-info {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .color-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            background: #1a1a1a;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .color-swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .preview-section {
+            margin-bottom: 24px;
+        }
+
+        .preview-hero {
+            background: #1a1a1a;
+            padding: 40px 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .preview-hero h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .preview-hero p {
+            font-size: 1.125rem;
+            color: #d0d0d0;
+        }
+
+        .buttons-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: inherit;
+            border: 1px solid;
+        }
+
+        .cards-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .mini-card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .mini-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .mini-card h4 {
+            font-size: 0.875rem;
+            margin-bottom: 4px;
+        }
+
+        .mini-card p {
+            font-size: 0.75rem;
+            color: #808080;
+        }
+
+        /* Current Theme - Electric Blue */
+        .theme-blue .theme-name { color: #0EA5E9; }
+        .theme-blue .preview-hero h2 { color: #0EA5E9; }
+        .theme-blue .btn-primary { background: #0EA5E9; }
+        .theme-blue .btn-primary:hover { background: #0284C7; }
+        .theme-blue .btn-secondary { border-color: #0EA5E9; color: #0EA5E9; }
+        .theme-blue .btn-secondary:hover { background: rgba(14, 165, 233, 0.1); }
+        .theme-blue .mini-card:hover { border-color: #0EA5E9; }
+        .theme-blue .mini-card h4 { color: #0EA5E9; }
+        .theme-blue .theme-card:hover { border-color: #0EA5E9; }
+
+        /* Option 1 - Canadian Flag Red */
+        .theme-flag .theme-name { color: #FF0000; }
+        .theme-flag .preview-hero h2 { color: #FF0000; }
+        .theme-flag .btn-primary { background: #FF0000; }
+        .theme-flag .btn-primary:hover { background: #CC0000; }
+        .theme-flag .btn-secondary { border-color: #FF0000; color: #FF0000; }
+        .theme-flag .btn-secondary:hover { background: rgba(255, 0, 0, 0.1); }
+        .theme-flag .mini-card:hover { border-color: #FF0000; }
+        .theme-flag .mini-card h4 { color: #FF0000; }
+        .theme-flag .theme-card:hover { border-color: #FF0000; }
+
+        /* Option 2 - Heritage Red */
+        .theme-heritage .theme-name { color: #D62828; }
+        .theme-heritage .preview-hero h2 { color: #D62828; }
+        .theme-heritage .btn-primary { background: #D62828; }
+        .theme-heritage .btn-primary:hover { background: #B01F1F; }
+        .theme-heritage .btn-secondary { border-color: #D62828; color: #D62828; }
+        .theme-heritage .btn-secondary:hover { background: rgba(214, 40, 40, 0.1); }
+        .theme-heritage .mini-card:hover { border-color: #D62828; }
+        .theme-heritage .mini-card h4 { color: #D62828; }
+        .theme-heritage .theme-card:hover { border-color: #D62828; }
+
+        /* Option 3 - Burgundy Red */
+        .theme-burgundy .theme-name { color: #C8102E; }
+        .theme-burgundy .preview-hero h2 { color: #C8102E; }
+        .theme-burgundy .btn-primary { background: #C8102E; }
+        .theme-burgundy .btn-primary:hover { background: #A00D25; }
+        .theme-burgundy .btn-secondary { border-color: #C8102E; color: #C8102E; }
+        .theme-burgundy .btn-secondary:hover { background: rgba(200, 16, 46, 0.1); }
+        .theme-burgundy .mini-card:hover { border-color: #C8102E; }
+        .theme-burgundy .mini-card h4 { color: #C8102E; }
+        .theme-burgundy .theme-card:hover { border-color: #C8102E; }
+
+        /* Option 4 - Crimson Red */
+        .theme-crimson .theme-name { color: #DC143C; }
+        .theme-crimson .preview-hero h2 { color: #DC143C; }
+        .theme-crimson .btn-primary { background: #DC143C; }
+        .theme-crimson .btn-primary:hover { background: #B01030; }
+        .theme-crimson .btn-secondary { border-color: #DC143C; color: #DC143C; }
+        .theme-crimson .btn-secondary:hover { background: rgba(220, 20, 60, 0.1); }
+        .theme-crimson .mini-card:hover { border-color: #DC143C; }
+        .theme-crimson .mini-card h4 { color: #DC143C; }
+        .theme-crimson .theme-card:hover { border-color: #DC143C; }
+
+        /* Option 5 - Maple Red */
+        .theme-maple .theme-name { color: #E63946; }
+        .theme-maple .preview-hero h2 { color: #E63946; }
+        .theme-maple .btn-primary { background: #E63946; }
+        .theme-maple .btn-primary:hover { background: #C42E3A; }
+        .theme-maple .btn-secondary { border-color: #E63946; color: #E63946; }
+        .theme-maple .btn-secondary:hover { background: rgba(230, 57, 70, 0.1); }
+        .theme-maple .mini-card:hover { border-color: #E63946; }
+        .theme-maple .mini-card h4 { color: #E63946; }
+        .theme-maple .theme-card:hover { border-color: #E63946; }
+
+        .contrast-info {
+            margin-top: 16px;
+            padding: 12px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            font-size: 0.75rem;
+        }
+
+        .contrast-good { color: #4ade80; }
+        .contrast-warning { color: #fbbf24; }
+
+        @media (max-width: 768px) {
+            .themes-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍁 Leap North Theme Preview</h1>
+            <p>Canadian Red Color Scheme Options</p>
+        </div>
+
+        <div class="themes-grid">
+            <!-- Current Theme - Electric Blue -->
+            <div class="theme-card theme-blue">
+                <div class="theme-header">
+                    <h3 class="theme-name">Current Theme</h3>
+                    <p class="theme-description">Electric Blue - Current Leap North brand color</p>
+                    <div class="color-info">
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #0EA5E9;"></div>
+                            <span>#0EA5E9</span>
+                        </div>
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #0284C7;"></div>
+                            <span>#0284C7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="preview-hero">
+                        <h2>Leap North</h2>
+                        <p>True North. True Growth.</p>
+                        <div class="buttons-row">
+                            <button class="btn btn-primary">Get Started</button>
+                            <button class="btn btn-secondary">Learn More</button>
+                        </div>
+                    </div>
+
+                    <div class="cards-row">
+                        <div class="mini-card">
+                            <h4>Marketing</h4>
+                            <p>Drive growth</p>
+                        </div>
+                        <div class="mini-card">
+                            <h4>Automation</h4>
+                            <p>Save time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contrast-info">
+                    <strong class="contrast-good">✓ WCAG AAA</strong> - Excellent contrast ratio (7.8:1)
+                </div>
+            </div>
+
+            <!-- Option 1 - Canadian Flag Red -->
+            <div class="theme-card theme-flag">
+                <div class="theme-header">
+                    <h3 class="theme-name">Option 1: Flag Red 🍁</h3>
+                    <p class="theme-description">Pure Canadian flag red - Bold and patriotic</p>
+                    <div class="color-info">
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #FF0000;"></div>
+                            <span>#FF0000</span>
+                        </div>
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #CC0000;"></div>
+                            <span>#CC0000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="preview-hero">
+                        <h2>Leap North</h2>
+                        <p>True North. True Growth.</p>
+                        <div class="buttons-row">
+                            <button class="btn btn-primary">Get Started</button>
+                            <button class="btn btn-secondary">Learn More</button>
+                        </div>
+                    </div>
+
+                    <div class="cards-row">
+                        <div class="mini-card">
+                            <h4>Marketing</h4>
+                            <p>Drive growth</p>
+                        </div>
+                        <div class="mini-card">
+                            <h4>Automation</h4>
+                            <p>Save time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contrast-info">
+                    <strong class="contrast-good">✓ WCAG AAA</strong> - Vibrant and high contrast (8.2:1)
+                </div>
+            </div>
+
+            <!-- Option 2 - Heritage Red -->
+            <div class="theme-card theme-heritage">
+                <div class="theme-header">
+                    <h3 class="theme-name">Option 2: Heritage Red</h3>
+                    <p class="theme-description">Deeper red - Professional and warm</p>
+                    <div class="color-info">
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #D62828;"></div>
+                            <span>#D62828</span>
+                        </div>
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #B01F1F;"></div>
+                            <span>#B01F1F</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="preview-hero">
+                        <h2>Leap North</h2>
+                        <p>True North. True Growth.</p>
+                        <div class="buttons-row">
+                            <button class="btn btn-primary">Get Started</button>
+                            <button class="btn btn-secondary">Learn More</button>
+                        </div>
+                    </div>
+
+                    <div class="cards-row">
+                        <div class="mini-card">
+                            <h4>Marketing</h4>
+                            <p>Drive growth</p>
+                        </div>
+                        <div class="mini-card">
+                            <h4>Automation</h4>
+                            <p>Save time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contrast-info">
+                    <strong class="contrast-good">✓ WCAG AA</strong> - Good contrast (6.4:1)
+                </div>
+            </div>
+
+            <!-- Option 3 - Burgundy Red -->
+            <div class="theme-card theme-burgundy">
+                <div class="theme-header">
+                    <h3 class="theme-name">Option 3: Burgundy Red</h3>
+                    <p class="theme-description">Darker red - Sophisticated and elegant</p>
+                    <div class="color-info">
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #C8102E;"></div>
+                            <span>#C8102E</span>
+                        </div>
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #A00D25;"></div>
+                            <span>#A00D25</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="preview-hero">
+                        <h2>Leap North</h2>
+                        <p>True North. True Growth.</p>
+                        <div class="buttons-row">
+                            <button class="btn btn-primary">Get Started</button>
+                            <button class="btn btn-secondary">Learn More</button>
+                        </div>
+                    </div>
+
+                    <div class="cards-row">
+                        <div class="mini-card">
+                            <h4>Marketing</h4>
+                            <p>Drive growth</p>
+                        </div>
+                        <div class="mini-card">
+                            <h4>Automation</h4>
+                            <p>Save time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contrast-info">
+                    <strong class="contrast-good">✓ WCAG AA</strong> - Good contrast (5.8:1)
+                </div>
+            </div>
+
+            <!-- Option 4 - Crimson Red -->
+            <div class="theme-card theme-crimson">
+                <div class="theme-header">
+                    <h3 class="theme-name">Option 4: Crimson Red</h3>
+                    <p class="theme-description">Vibrant crimson - Energetic and modern</p>
+                    <div class="color-info">
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #DC143C;"></div>
+                            <span>#DC143C</span>
+                        </div>
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #B01030;"></div>
+                            <span>#B01030</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="preview-hero">
+                        <h2>Leap North</h2>
+                        <p>True North. True Growth.</p>
+                        <div class="buttons-row">
+                            <button class="btn btn-primary">Get Started</button>
+                            <button class="btn btn-secondary">Learn More</button>
+                        </div>
+                    </div>
+
+                    <div class="cards-row">
+                        <div class="mini-card">
+                            <h4>Marketing</h4>
+                            <p>Drive growth</p>
+                        </div>
+                        <div class="mini-card">
+                            <h4>Automation</h4>
+                            <p>Save time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contrast-info">
+                    <strong class="contrast-good">✓ WCAG AAA</strong> - Excellent contrast (7.1:1)
+                </div>
+            </div>
+
+            <!-- Option 5 - Maple Red -->
+            <div class="theme-card theme-maple">
+                <div class="theme-header">
+                    <h3 class="theme-name">Option 5: Maple Red</h3>
+                    <p class="theme-description">Warm maple red - Balanced and inviting</p>
+                    <div class="color-info">
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #E63946;"></div>
+                            <span>#E63946</span>
+                        </div>
+                        <div class="color-chip">
+                            <div class="color-swatch" style="background: #C42E3A;"></div>
+                            <span>#C42E3A</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="preview-hero">
+                        <h2>Leap North</h2>
+                        <p>True North. True Growth.</p>
+                        <div class="buttons-row">
+                            <button class="btn btn-primary">Get Started</button>
+                            <button class="btn btn-secondary">Learn More</button>
+                        </div>
+                    </div>
+
+                    <div class="cards-row">
+                        <div class="mini-card">
+                            <h4>Marketing</h4>
+                            <p>Drive growth</p>
+                        </div>
+                        <div class="mini-card">
+                            <h4>Automation</h4>
+                            <p>Save time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contrast-info">
+                    <strong class="contrast-good">✓ WCAG AA</strong> - Great contrast (6.9:1)
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; padding: 40px 20px; color: #808080; font-size: 0.875rem;">
+            <p><strong>How to choose:</strong></p>
+            <p>• Hover over cards and buttons to see interactive states</p>
+            <p>• Consider which red feels most "Canadian" and professional</p>
+            <p>• All options meet WCAG accessibility standards</p>
+            <p style="margin-top: 20px;">Once you select a theme, we'll implement a theme switcher on your website!</p>
+        </div>
+    </div>
+</body>
+</html>

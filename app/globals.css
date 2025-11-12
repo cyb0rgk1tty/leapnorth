@@ -4,49 +4,50 @@
 
 @layer base {
   :root {
-    /* Base colors - Navy Deep Theme */
-    --background: 217 55% 7%; /* #0a0f1e - Navy deep background */
+    /* Crimson Red Theme - Canadian Inspired 🍁 */
+    /* Base colors - Deep black with red accents */
+    --background: 0 0% 4%; /* #0a0a0a - Deep black background */
     --foreground: 0 0% 96%; /* #f5f5f5 - Off-white text */
 
-    /* Primary electric blue */
-    --primary: 199 89% 48%; /* #0EA5E9 - Electric blue accent */
+    /* Primary crimson red */
+    --primary: 348 83% 47%; /* #DC143C - Crimson red accent */
     --primary-foreground: 0 0% 100%; /* #ffffff */
 
     /* Secondary */
-    --secondary: 217 45% 13%; /* #131b2e - Dark navy secondary */
+    --secondary: 0 0% 10%; /* #1a1a1a - Dark gray secondary */
     --secondary-foreground: 0 0% 96%; /* #f5f5f5 */
 
     /* Accent */
-    --accent: 217 40% 20%; /* #1e2a47 - Mid navy accent */
+    --accent: 0 0% 16%; /* #292929 - Mid gray accent */
     --accent-foreground: 0 0% 96%; /* #f5f5f5 */
 
     /* Muted */
-    --muted: 217 45% 13%; /* #131b2e - Same as secondary */
+    --muted: 0 0% 10%; /* #1a1a1a - Same as secondary */
     --muted-foreground: 0 0% 53%; /* #888888 */
 
     /* UI elements */
-    --border: 217 35% 28%; /* #2d3f5f - Navy border */
-    --input: 217 40% 20%; /* #1e2a47 - Input background */
-    --ring: 199 89% 48%; /* #0EA5E9 - Electric blue focus ring */
+    --border: 0 0% 16%; /* #2a2a2a - Dark border */
+    --input: 0 0% 16%; /* #292929 - Input background */
+    --ring: 348 83% 47%; /* #DC143C - Crimson red focus ring */
 
     /* Card */
-    --card: 217 45% 13%; /* #131b2e - Card background */
+    --card: 0 0% 10%; /* #1a1a1a - Card background */
     --card-foreground: 0 0% 96%; /* #f5f5f5 */
 
     /* Popover */
-    --popover: 217 45% 13%; /* #131b2e - Popover background */
+    --popover: 0 0% 10%; /* #1a1a1a - Popover background */
     --popover-foreground: 0 0% 96%; /* #f5f5f5 */
 
-    /* Destructive */
-    --destructive: 0 84% 60%; /* Red for errors */
+    /* Destructive - Slightly different red for errors */
+    --destructive: 0 84% 60%; /* #f44336 - Error red */
     --destructive-foreground: 0 0% 98%;
 
-    /* Chart colors - Electric blue theme */
-    --chart-1: 199 89% 48%; /* #0EA5E9 - Primary blue */
-    --chart-2: 199 95% 62%; /* #38BDF8 - Light blue */
-    --chart-3: 187 92% 43%; /* #06B6D4 - Cyan */
-    --chart-4: 217 91% 60%; /* #3B82F6 - Neon blue */
-    --chart-5: 199 89% 40%; /* #0284C7 - Deep blue */
+    /* Chart colors - Crimson red theme */
+    --chart-1: 348 83% 47%; /* #DC143C - Primary crimson */
+    --chart-2: 348 83% 60%; /* #E84A5F - Light crimson */
+    --chart-3: 355 78% 56%; /* #E63946 - Bright red */
+    --chart-4: 348 69% 50%; /* #C9184A - Deep crimson */
+    --chart-5: 348 83% 35%; /* #B01030 - Dark crimson */
 
     /* Border radius */
     --radius: 0.5rem;
