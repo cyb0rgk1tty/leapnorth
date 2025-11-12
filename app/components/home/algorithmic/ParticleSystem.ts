@@ -237,13 +237,12 @@ export class ParticleSystem {
   }
 
   /**
-   * Resize canvas and reinitialize particles
+   * Resize particle system (logical dimensions, not canvas dimensions)
    */
   public resize(width: number, height: number): void {
     this.width = width;
     this.height = height;
-    this.canvas.width = width;
-    this.canvas.height = height;
+    // Don't set canvas.width/height here - that's handled by the component with DPR scaling
 
     // Adjust particle positions to new dimensions
     this.particles.forEach(particle => {

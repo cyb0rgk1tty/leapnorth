@@ -26,28 +26,11 @@ export function AlgorithmicBackground() {
 
   // Check if low-end device on mount
   useEffect(() => {
-    const lowEnd = isLowEndDevice();
-    console.log('[AlgorithmicBackground] Device check:', {
-      lowEnd,
-      cores: navigator.hardwareConcurrency,
-      memory: (navigator as any).deviceMemory,
-    });
-    setIsLowEnd(lowEnd);
+    setIsLowEnd(isLowEndDevice());
   }, []);
 
   // Check if we should disable the effect
   const shouldDisable = prefersReducedMotion || isLowEnd;
-
-  useEffect(() => {
-    console.log('[AlgorithmicBackground] Render state:', {
-      isLoaded,
-      shouldDisable,
-      prefersReducedMotion,
-      isLowEnd,
-      isVisible,
-      hasCanvas: !!canvasRef.current,
-    });
-  }, [isLoaded, shouldDisable, prefersReducedMotion, isLowEnd, isVisible]);
 
   /**
    * Initialize canvas and particle system
@@ -94,8 +77,10 @@ export function AlgorithmicBackground() {
     // Initial size
     updateCanvasSize();
 
-    // Create particle system
+    // Create particle system with logical dimensions
+    const rect = canvas.getBoundingClientRect();
     particleSystemRef.current = new ParticleSystem(canvas, config);
+    particleSystemRef.current.resize(rect.width, rect.height);
 
     // Create cursor interaction handler
     cursorInteractionRef.current = new CursorInteraction(canvas, particleSystemRef.current);
@@ -184,8 +169,13 @@ export function AlgorithmicBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 -z-10"
-      style={{ width: '100%', height: '100%' }}
+      className="absolute inset-0"
+      style={{
+        width: '100%',
+        height: '100%',
+        zIndex: 0,
+        pointerEvents: 'none',
+      }}
       aria-hidden="true"
       role="presentation"
     />

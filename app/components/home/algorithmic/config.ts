@@ -6,19 +6,19 @@
 export const PARTICLE_CONFIG = {
   // Particle counts (adaptive based on device)
   desktop: {
-    particleCount: 3000,
-    connectionDistance: 120,
-    cursorRadius: 200,
+    particleCount: 100,  // Reduced from 3000
+    connectionDistance: 150,
+    cursorRadius: 250,
   },
   tablet: {
-    particleCount: 2000,
-    connectionDistance: 100,
-    cursorRadius: 150,
+    particleCount: 60,  // Reduced from 2000
+    connectionDistance: 120,
+    cursorRadius: 180,
   },
   mobile: {
-    particleCount: 1000,
-    connectionDistance: 80,
-    cursorRadius: 120,
+    particleCount: 40,  // Reduced from 1000
+    connectionDistance: 100,
+    cursorRadius: 150,
   },
 
   // Colors (Crimson Red theme)
@@ -31,20 +31,20 @@ export const PARTICLE_CONFIG = {
 
   // Particle properties
   particle: {
-    minSize: 1,
-    maxSize: 3,
-    minSpeed: 0.2,
-    maxSpeed: 0.8,
-    baseAlpha: 0.6,
-    hoverAlpha: 0.9,
+    minSize: 2,      // Increased from 1
+    maxSize: 4,      // Increased from 3
+    minSpeed: 0.3,
+    maxSpeed: 1.0,
+    baseAlpha: 0.7,  // Increased from 0.6
+    hoverAlpha: 1.0,
   },
 
   // Connection lines
   connections: {
-    maxDistance: 120,        // Max distance to draw connection
-    lineWidth: 0.5,
-    alpha: 0.15,
-    hoverAlpha: 0.35,
+    maxDistance: 150,        // Increased from 120
+    lineWidth: 1,            // Increased from 0.5
+    alpha: 0.2,              // Increased from 0.15
+    hoverAlpha: 0.5,         // Increased from 0.35
   },
 
   // Cursor interaction
@@ -64,10 +64,10 @@ export const PARTICLE_CONFIG = {
 
   // Performance
   performance: {
-    enableGlow: true,
-    enableTrails: false,     // Disable on mobile
+    enableGlow: false,       // Disabled for performance
+    enableTrails: false,
     enableConnections: true,
-    adaptiveQuality: true,   // Reduce quality if FPS drops
+    adaptiveQuality: true,
   },
 } as const;
 
@@ -100,7 +100,6 @@ export function isLowEndDevice(): boolean {
   // Check device memory (if available)
   const memory = (navigator as any).deviceMemory || 4;
 
-  // Temporarily disabled for debugging - always return false
-  console.log('[isLowEndDevice]', { cores, memory, wouldBeDisabled: cores <= 2 || memory <= 2 });
-  return false; // Temporarily disabled
+  // Disabled - let all devices run the animation (performance optimized)
+  return false;
 }
