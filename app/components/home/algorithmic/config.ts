@@ -52,7 +52,7 @@ export const PARTICLE_CONFIG = {
     attractionRadius: 200,
     attractionStrength: 0.8,      // Pull particles from far away
     repulsionRadius: 80,           // Push particles away when close
-    repulsionStrength: 1.5,        // Strong push when close
+    repulsionStrength: 0.4,        // Gentle, fluid push when close
     speedMultiplier: 1.5,
     colorShiftIntensity: 0.3,
   },
