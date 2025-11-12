@@ -8,17 +8,17 @@ export const PARTICLE_CONFIG = {
   desktop: {
     particleCount: 100,  // Reduced from 3000
     connectionDistance: 150,
-    cursorRadius: 250,
+    cursorRadius: 300,   // Increased from 250 for larger attraction area
   },
   tablet: {
     particleCount: 60,  // Reduced from 2000
     connectionDistance: 120,
-    cursorRadius: 180,
+    cursorRadius: 220,  // Increased from 180
   },
   mobile: {
     particleCount: 40,  // Reduced from 1000
     connectionDistance: 100,
-    cursorRadius: 150,
+    cursorRadius: 180,  // Increased from 150
   },
 
   // Colors (Crimson Red theme)
@@ -50,9 +50,9 @@ export const PARTICLE_CONFIG = {
   // Cursor interaction
   cursor: {
     attractionRadius: 200,
-    attractionStrength: 0.03,
+    attractionStrength: 0.15,     // Increased from 0.03 for stronger attraction
     repulsionStrength: 0.02,
-    speedMultiplier: 1.5,
+    speedMultiplier: 1.2,         // Reduced from 1.5 for smoother movement
     colorShiftIntensity: 0.3,
   },
 
