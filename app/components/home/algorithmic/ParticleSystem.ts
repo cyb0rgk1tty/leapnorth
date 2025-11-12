@@ -26,12 +26,12 @@ export class ParticleSystem {
   private cursorX: number = 0;
   private cursorY: number = 0;
   private cursorActive: boolean = false;
-  private config: typeof PARTICLE_CONFIG.desktop;
+  private config: typeof PARTICLE_CONFIG.desktop | typeof PARTICLE_CONFIG.tablet | typeof PARTICLE_CONFIG.mobile;
   private primaryColor: { r: number; g: number; b: number };
   private secondaryColor: { r: number; g: number; b: number };
   private glowColor: { r: number; g: number; b: number };
 
-  constructor(canvas: HTMLCanvasElement, config: typeof PARTICLE_CONFIG.desktop) {
+  constructor(canvas: HTMLCanvasElement, config: typeof PARTICLE_CONFIG.desktop | typeof PARTICLE_CONFIG.tablet | typeof PARTICLE_CONFIG.mobile) {
     this.canvas = canvas;
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) throw new Error('Could not get 2d context');
@@ -92,7 +92,8 @@ export class ParticleSystem {
    * Update particle positions and physics
    */
   public update(): void {
-    const { cursorRadius, attractionStrength, speedMultiplier } = PARTICLE_CONFIG.cursor;
+    const { cursorRadius } = this.config;
+    const { attractionStrength, speedMultiplier } = PARTICLE_CONFIG.cursor;
     const { hoverAlpha, baseAlpha } = PARTICLE_CONFIG.particle;
 
     this.particles.forEach((particle) => {
@@ -168,7 +169,7 @@ export class ParticleSystem {
    */
   private drawConnections(): void {
     const { maxDistance, lineWidth, alpha, hoverAlpha } = PARTICLE_CONFIG.connections;
-    const { cursorRadius } = PARTICLE_CONFIG.cursor;
+    const { cursorRadius } = this.config;
 
     for (let i = 0; i < this.particles.length; i++) {
       for (let j = i + 1; j < this.particles.length; j++) {

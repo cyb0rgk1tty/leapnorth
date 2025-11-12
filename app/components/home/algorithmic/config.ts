@@ -100,5 +100,7 @@ export function isLowEndDevice(): boolean {
   // Check device memory (if available)
   const memory = (navigator as any).deviceMemory || 4;
 
-  return cores <= 2 || memory <= 2;
+  // Temporarily disabled for debugging - always return false
+  console.log('[isLowEndDevice]', { cores, memory, wouldBeDisabled: cores <= 2 || memory <= 2 });
+  return false; // Temporarily disabled
 }

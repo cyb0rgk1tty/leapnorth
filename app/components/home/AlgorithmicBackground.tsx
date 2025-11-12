@@ -21,10 +21,33 @@ export function AlgorithmicBackground() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isLowEnd, setIsLowEnd] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
+  // Check if low-end device on mount
+  useEffect(() => {
+    const lowEnd = isLowEndDevice();
+    console.log('[AlgorithmicBackground] Device check:', {
+      lowEnd,
+      cores: navigator.hardwareConcurrency,
+      memory: (navigator as any).deviceMemory,
+    });
+    setIsLowEnd(lowEnd);
+  }, []);
+
   // Check if we should disable the effect
-  const shouldDisable = prefersReducedMotion || (typeof window !== 'undefined' && isLowEndDevice());
+  const shouldDisable = prefersReducedMotion || isLowEnd;
+
+  useEffect(() => {
+    console.log('[AlgorithmicBackground] Render state:', {
+      isLoaded,
+      shouldDisable,
+      prefersReducedMotion,
+      isLowEnd,
+      isVisible,
+      hasCanvas: !!canvasRef.current,
+    });
+  }, [isLoaded, shouldDisable, prefersReducedMotion, isLowEnd, isVisible]);
 
   /**
    * Initialize canvas and particle system
