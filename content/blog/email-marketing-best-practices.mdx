@@ -99,7 +99,7 @@ Your subject line determines if emails get opened:
 
 ## 4. Personalize Beyond the Name
 
-Go deeper than {{FirstName}}:
+Go deeper than `{"{"}{"{"}}FirstName{"}"}{"}"}`:
 
 - Reference past purchases
 - Acknowledge browsing behavior
@@ -191,7 +191,7 @@ const abTest = {
   hypothesis: "Personalized subject lines will increase open rates",
   variants: {
     control: "New product launch announcement",
-    test: "{{FirstName}}, see our new product made for you"
+    test: "FirstName, see our new product made for you"
   },
   successMetric: "open_rate",
   sampleSize: 5000,
