@@ -1,0 +1,286 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base colors - Navy Deep Theme */
+    --background: 217 55% 7%; /* #0a0f1e - Navy deep background */
+    --foreground: 0 0% 96%; /* #f5f5f5 - Off-white text */
+
+    /* Primary electric blue */
+    --primary: 199 89% 48%; /* #0EA5E9 - Electric blue accent */
+    --primary-foreground: 0 0% 100%; /* #ffffff */
+
+    /* Secondary */
+    --secondary: 217 45% 13%; /* #131b2e - Dark navy secondary */
+    --secondary-foreground: 0 0% 96%; /* #f5f5f5 */
+
+    /* Accent */
+    --accent: 217 40% 20%; /* #1e2a47 - Mid navy accent */
+    --accent-foreground: 0 0% 96%; /* #f5f5f5 */
+
+    /* Muted */
+    --muted: 217 45% 13%; /* #131b2e - Same as secondary */
+    --muted-foreground: 0 0% 53%; /* #888888 */
+
+    /* UI elements */
+    --border: 217 35% 28%; /* #2d3f5f - Navy border */
+    --input: 217 40% 20%; /* #1e2a47 - Input background */
+    --ring: 199 89% 48%; /* #0EA5E9 - Electric blue focus ring */
+
+    /* Card */
+    --card: 217 45% 13%; /* #131b2e - Card background */
+    --card-foreground: 0 0% 96%; /* #f5f5f5 */
+
+    /* Popover */
+    --popover: 217 45% 13%; /* #131b2e - Popover background */
+    --popover-foreground: 0 0% 96%; /* #f5f5f5 */
+
+    /* Destructive */
+    --destructive: 0 84% 60%; /* Red for errors */
+    --destructive-foreground: 0 0% 98%;
+
+    /* Chart colors - Electric blue theme */
+    --chart-1: 199 89% 48%; /* #0EA5E9 - Primary blue */
+    --chart-2: 199 95% 62%; /* #38BDF8 - Light blue */
+    --chart-3: 187 92% 43%; /* #06B6D4 - Cyan */
+    --chart-4: 217 91% 60%; /* #3B82F6 - Neon blue */
+    --chart-5: 199 89% 40%; /* #0284C7 - Deep blue */
+
+    /* Border radius */
+    --radius: 0.5rem;
+  }
+
+  /* Force dark mode */
+  .dark {
+    --background: 217 55% 7%; /* Navy deep */
+    --foreground: 0 0% 96%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--accent));
+    border-radius: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--primary));
+  }
+
+  /* Selection color */
+  ::selection {
+    background-color: hsl(var(--primary) / 0.3);
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* Blog content styles - MDX/Prose */
+  .blog-content {
+    color: hsl(var(--foreground));
+    line-height: 1.8;
+  }
+
+  .blog-content h1,
+  .blog-content h2,
+  .blog-content h3,
+  .blog-content h4,
+  .blog-content h5,
+  .blog-content h6 {
+    color: hsl(var(--foreground));
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    line-height: 1.3;
+    scroll-margin-top: 6rem;
+  }
+
+  .blog-content h1 {
+    font-size: 2.25rem;
+  }
+
+  .blog-content h2 {
+    font-size: 1.875rem;
+    border-bottom: 1px solid hsl(var(--border));
+    padding-bottom: 0.5rem;
+  }
+
+  .blog-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .blog-content h4 {
+    font-size: 1.25rem;
+  }
+
+  .blog-content p {
+    margin-bottom: 1.5em;
+  }
+
+  .blog-content a {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .blog-content a:hover {
+    color: hsl(var(--primary) / 0.8);
+  }
+
+  .blog-content strong {
+    font-weight: 600;
+    color: hsl(var(--foreground));
+  }
+
+  .blog-content ul,
+  .blog-content ol {
+    margin-bottom: 1.5em;
+    padding-left: 1.5em;
+  }
+
+  .blog-content ul li,
+  .blog-content ol li {
+    margin-bottom: 0.5em;
+    line-height: 1.7;
+  }
+
+  .blog-content ul {
+    list-style-type: disc;
+  }
+
+  .blog-content ol {
+    list-style-type: decimal;
+  }
+
+  .blog-content pre {
+    background-color: hsl(var(--secondary));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin-bottom: 1.5em;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .blog-content code {
+    background-color: hsl(var(--secondary));
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .blog-content pre code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+  }
+
+  .blog-content blockquote {
+    border-left: 4px solid hsl(var(--primary));
+    padding-left: 1.5rem;
+    margin: 1.5em 0;
+    font-style: italic;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1.5em 0;
+  }
+
+  .blog-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+  }
+
+  .blog-content table th,
+  .blog-content table td {
+    padding: 0.75rem;
+    border: 1px solid hsl(var(--border));
+    text-align: left;
+  }
+
+  .blog-content table th {
+    background-color: hsl(var(--secondary));
+    font-weight: 600;
+  }
+
+  .blog-content hr {
+    border: none;
+    border-top: 1px solid hsl(var(--border));
+    margin: 2em 0;
+  }
+
+  /* Syntax highlighting (rehype-highlight) */
+  .blog-content .hljs {
+    background: hsl(var(--secondary));
+    color: hsl(var(--foreground));
+  }
+
+  .blog-content .hljs-comment,
+  .blog-content .hljs-quote {
+    color: #6a737d;
+  }
+
+  .blog-content .hljs-keyword,
+  .blog-content .hljs-selector-tag {
+    color: #d73a49;
+  }
+
+  .blog-content .hljs-string,
+  .blog-content .hljs-doctag {
+    color: #22863a;
+  }
+
+  .blog-content .hljs-title,
+  .blog-content .hljs-section {
+    color: #6f42c1;
+  }
+
+  .blog-content .hljs-type,
+  .blog-content .hljs-tag {
+    color: #005cc5;
+  }
+
+  .blog-content .hljs-name,
+  .blog-content .hljs-attribute {
+    color: hsl(var(--primary));
+  }
+
+  .blog-content .hljs-variable,
+  .blog-content .hljs-template-variable {
+    color: #e36209;
+  }
+
+  .blog-content .hljs-number,
+  .blog-content .hljs-literal {
+    color: #005cc5;
+  }
+}
