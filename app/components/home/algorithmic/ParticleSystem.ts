@@ -110,7 +110,7 @@ export class ParticleSystem {
           const angle = Math.atan2(particle.y - this.cursorY, particle.x - this.cursorX);
 
           // Velocity multiplier: faster cursor = stronger push (clamped to 1-5x)
-          const velocityMultiplier = Math.min(1 + (this.cursorVelocity / 50), 5);
+          const velocityMultiplier = Math.max(1, Math.min(1 + (this.cursorVelocity / 50), 5));
 
           particle.vx += Math.cos(angle) * force * repulsionStrength * velocityMultiplier;
           particle.vy += Math.sin(angle) * force * repulsionStrength * velocityMultiplier;

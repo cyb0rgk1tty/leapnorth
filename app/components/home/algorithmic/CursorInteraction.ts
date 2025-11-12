@@ -105,6 +105,9 @@ export class CursorInteraction {
     const rect = this.canvas.getBoundingClientRect();
     this.cursorX = e.clientX - rect.left;
     this.cursorY = e.clientY - rect.top;
+    this.prevCursorX = this.cursorX;
+    this.prevCursorY = this.cursorY;
+    this.cursorVelocity = 0;
     this.updateParticleSystem();
   }
 
@@ -126,6 +129,9 @@ export class CursorInteraction {
       const rect = this.canvas.getBoundingClientRect();
       this.cursorX = touch.clientX - rect.left;
       this.cursorY = touch.clientY - rect.top;
+      this.prevCursorX = this.cursorX;
+      this.prevCursorY = this.cursorY;
+      this.cursorVelocity = 0;
       this.updateParticleSystem();
     }
   }
