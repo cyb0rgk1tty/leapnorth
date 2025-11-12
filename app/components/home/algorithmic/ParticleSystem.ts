@@ -128,9 +128,9 @@ export class ParticleSystem {
       particle.x += particle.vx;
       particle.y += particle.vy;
 
-      // Apply friction
-      particle.vx *= 0.98;
-      particle.vy *= 0.98;
+      // Apply friction (reduced for more responsive movement)
+      particle.vx *= 0.95;
+      particle.vy *= 0.95;
 
       // Ensure minimum speed (particles shouldn't stop completely)
       const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
