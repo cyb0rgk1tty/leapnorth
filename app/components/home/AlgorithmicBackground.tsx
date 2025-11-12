@@ -83,10 +83,9 @@ export function AlgorithmicBackground() {
     particleSystemRef.current = new ParticleSystem(canvas, config);
     particleSystemRef.current.resize(rect.width, rect.height);
 
-    // Create cursor interaction handler (listen on container, not canvas)
-    const container = containerRef.current || canvas.parentElement;
-    if (container) {
-      cursorInteractionRef.current = new CursorInteraction(container as HTMLElement, particleSystemRef.current, canvas);
+    // Create cursor interaction handler (listen on container div)
+    if (containerRef.current) {
+      cursorInteractionRef.current = new CursorInteraction(containerRef.current, particleSystemRef.current, canvas);
     }
 
     // Animation loop
@@ -171,17 +170,18 @@ export function AlgorithmicBackground() {
   }
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0"
-      style={{
-        width: '100%',
-        height: '100%',
-        zIndex: 0,
-        pointerEvents: 'none',
-      }}
-      aria-hidden="true"
-      role="presentation"
-    />
+    <div ref={containerRef} className="absolute inset-0" style={{ zIndex: 0 }}>
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0"
+        style={{
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
+        }}
+        aria-hidden="true"
+        role="presentation"
+      />
+    </div>
   );
 }
