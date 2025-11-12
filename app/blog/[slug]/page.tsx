@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Badge } from "@/app/components/ui/badge";
 import { Button } from "@/app/components/ui/button";
 import { Separator } from "@/app/components/ui/separator";
-import { ArrowLeftIconIcon, CalendarIconIcon, ClockIconIcon, PersonIcon, Share1Icon } from "@radix-ui/react-icons";
+import { ArrowLeftIcon, CalendarIcon, ClockIcon, PersonIcon, Share1Icon } from "@radix-ui/react-icons";
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/app/lib/mdx";
 import type { Metadata } from "next";
 
