@@ -284,4 +284,13 @@
   .blog-content .hljs-literal {
     color: #005cc5;
   }
+
+  /* Ultra-bold brand name styling */
+  .brand-name-ultra-bold {
+    font-weight: 950;
+    letter-spacing: -0.02em;
+    -webkit-text-stroke: 0.5px currentColor;
+    text-stroke: 0.5px currentColor;
+    paint-order: stroke fill;
+  }
 }

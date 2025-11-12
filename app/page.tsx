@@ -28,7 +28,7 @@ export default function Home() {
           >
             <motion.h1
               variants={staggerItem}
-              className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 text-foreground tracking-tight"
+              className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 text-foreground tracking-tight brand-name-ultra-bold"
             >
               Leap North
             </motion.h1>
