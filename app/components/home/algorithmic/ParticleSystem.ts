@@ -93,7 +93,7 @@ export class ParticleSystem {
    */
   public update(): void {
     const { cursorRadius } = this.config;
-    const { attractionStrength, speedMultiplier } = PARTICLE_CONFIG.cursor;
+    const { attractionStrength, repulsionRadius, repulsionStrength, speedMultiplier } = PARTICLE_CONFIG.cursor;
     const { hoverAlpha, baseAlpha } = PARTICLE_CONFIG.particle;
 
     this.particles.forEach((particle) => {
@@ -101,8 +101,19 @@ export class ParticleSystem {
       if (this.cursorActive) {
         const dist = distance(particle.x, particle.y, this.cursorX, this.cursorY);
 
-        if (dist < cursorRadius) {
-          // Attraction force
+        // Repulsion zone - push particles away when cursor is close
+        if (dist < repulsionRadius && dist > 0) {
+          const force = (repulsionRadius - dist) / repulsionRadius;
+          const angle = Math.atan2(particle.y - this.cursorY, particle.x - this.cursorX); // Reversed for repulsion
+
+          particle.vx += Math.cos(angle) * force * repulsionStrength;
+          particle.vy += Math.sin(angle) * force * repulsionStrength;
+
+          // Alpha boost when being repelled
+          particle.alpha = lerp(particle.alpha, hoverAlpha, 0.2);
+        }
+        // Attraction zone - pull particles toward cursor from medium distance
+        else if (dist >= repulsionRadius && dist < cursorRadius) {
           const force = (cursorRadius - dist) / cursorRadius;
           const angle = Math.atan2(this.cursorY - particle.y, this.cursorX - particle.x);
 

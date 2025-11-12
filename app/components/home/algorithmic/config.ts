@@ -50,8 +50,9 @@ export const PARTICLE_CONFIG = {
   // Cursor interaction
   cursor: {
     attractionRadius: 200,
-    attractionStrength: 0.8,      // Dramatically increased for very visible attraction
-    repulsionStrength: 0.02,
+    attractionStrength: 0.8,      // Pull particles from far away
+    repulsionRadius: 80,           // Push particles away when close
+    repulsionStrength: 1.5,        // Strong push when close
     speedMultiplier: 1.5,
     colorShiftIntensity: 0.3,
   },
