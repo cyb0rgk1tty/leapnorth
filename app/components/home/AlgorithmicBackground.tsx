@@ -15,6 +15,7 @@ import { debounce } from "./algorithmic/utils";
 export function AlgorithmicBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const eventOverlayRef = useRef<HTMLDivElement>(null);
   const particleSystemRef = useRef<ParticleSystem | null>(null);
   const cursorInteractionRef = useRef<CursorInteraction | null>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -36,7 +37,7 @@ export function AlgorithmicBackground() {
    * Set up particle system (immediately, no load delay)
    */
   useEffect(() => {
-    if (shouldDisable || !canvasRef.current || !containerRef.current) return;
+    if (shouldDisable || !canvasRef.current || !eventOverlayRef.current) return;
 
     const canvas = canvasRef.current;
     const config = getDeviceConfig();
@@ -68,9 +69,9 @@ export function AlgorithmicBackground() {
     particleSystemRef.current = new ParticleSystem(canvas, config);
     particleSystemRef.current.resize(rect.width, rect.height);
 
-    // Create cursor interaction handler (listen on container div)
-    if (containerRef.current) {
-      cursorInteractionRef.current = new CursorInteraction(containerRef.current, particleSystemRef.current, canvas);
+    // Create cursor interaction handler (listen on event overlay for full coverage)
+    if (eventOverlayRef.current) {
+      cursorInteractionRef.current = new CursorInteraction(eventOverlayRef.current, particleSystemRef.current, canvas);
     }
 
     // Animation loop
@@ -105,9 +106,9 @@ export function AlgorithmicBackground() {
       if (cursorInteractionRef.current) {
         cursorInteractionRef.current.detachListeners();
       }
-      if (containerRef.current && particleSystemRef.current) {
+      if (eventOverlayRef.current && particleSystemRef.current) {
         cursorInteractionRef.current = new CursorInteraction(
-          containerRef.current,
+          eventOverlayRef.current,
           particleSystemRef.current,
           canvas
         );
@@ -168,6 +169,7 @@ export function AlgorithmicBackground() {
 
   return (
     <div ref={containerRef} className="absolute inset-0" style={{ zIndex: 0 }}>
+      {/* Canvas layer (background) */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0"
@@ -178,6 +180,16 @@ export function AlgorithmicBackground() {
         }}
         aria-hidden="true"
         role="presentation"
+      />
+
+      {/* Event overlay ref (for bounds detection, doesn't block events) */}
+      <div
+        ref={eventOverlayRef}
+        className="absolute inset-0"
+        style={{
+          pointerEvents: 'none',  // Don't block any clicks/interactions
+        }}
+        aria-hidden="true"
       />
     </div>
   );

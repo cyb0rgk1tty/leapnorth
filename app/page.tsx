@@ -20,7 +20,7 @@ export default function Home() {
         {/* Algorithmic Background */}
         <AlgorithmicBackground />
 
-        <div className="max-w-7xl mx-auto text-center relative z-10">
+        <div className="max-w-7xl mx-auto text-center relative z-20">
           <motion.div
             initial="initial"
             animate="animate"

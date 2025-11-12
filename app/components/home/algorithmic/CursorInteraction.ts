@@ -17,6 +17,7 @@ export class CursorInteraction {
   private cursorVelocity: number = 0;
   private isActive: boolean = false;
   private isTouchDevice: boolean = false;
+  private useDocumentListener: boolean = false;
 
   // Bound event handlers (for cleanup)
   private boundHandleMouseMove: (e: MouseEvent) => void;
@@ -31,6 +32,7 @@ export class CursorInteraction {
     this.canvas = canvas || container as HTMLCanvasElement;
     this.particleSystem = particleSystem;
     this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    this.useDocumentListener = true;  // Use document for reliable event capture
 
     // Bind event handlers
     this.boundHandleMouseMove = throttle(this.handleMouseMove.bind(this), 16); // ~60fps
@@ -48,16 +50,25 @@ export class CursorInteraction {
    */
   private attachListeners(): void {
     if (this.isTouchDevice) {
-      // Touch events for mobile
+      // Touch events for mobile - always on container for touch
       this.container.addEventListener('touchstart', this.boundHandleTouchStart, { passive: true });
       this.container.addEventListener('touchmove', this.boundHandleTouchMove, { passive: true });
       this.container.addEventListener('touchend', this.boundHandleTouchEnd);
       this.container.addEventListener('touchcancel', this.boundHandleTouchEnd);
     } else {
       // Mouse events for desktop
-      this.container.addEventListener('mousemove', this.boundHandleMouseMove);
-      this.container.addEventListener('mouseenter', this.boundHandleMouseEnter);
-      this.container.addEventListener('mouseleave', this.boundHandleMouseLeave);
+      if (this.useDocumentListener) {
+        // Listen on document for full coverage (works even when cursor over content)
+        document.addEventListener('mousemove', this.boundHandleMouseMove);
+        // Still need enter/leave on container to know when in bounds
+        this.container.addEventListener('mouseenter', this.boundHandleMouseEnter);
+        this.container.addEventListener('mouseleave', this.boundHandleMouseLeave);
+      } else {
+        // Listen on container only
+        this.container.addEventListener('mousemove', this.boundHandleMouseMove);
+        this.container.addEventListener('mouseenter', this.boundHandleMouseEnter);
+        this.container.addEventListener('mouseleave', this.boundHandleMouseLeave);
+      }
     }
   }
 
@@ -71,9 +82,17 @@ export class CursorInteraction {
       this.container.removeEventListener('touchend', this.boundHandleTouchEnd);
       this.container.removeEventListener('touchcancel', this.boundHandleTouchEnd);
     } else {
-      this.container.removeEventListener('mousemove', this.boundHandleMouseMove);
-      this.container.removeEventListener('mouseenter', this.boundHandleMouseEnter);
-      this.container.removeEventListener('mouseleave', this.boundHandleMouseLeave);
+      if (this.useDocumentListener) {
+        // Remove from document
+        document.removeEventListener('mousemove', this.boundHandleMouseMove);
+        this.container.removeEventListener('mouseenter', this.boundHandleMouseEnter);
+        this.container.removeEventListener('mouseleave', this.boundHandleMouseLeave);
+      } else {
+        // Remove from container
+        this.container.removeEventListener('mousemove', this.boundHandleMouseMove);
+        this.container.removeEventListener('mouseenter', this.boundHandleMouseEnter);
+        this.container.removeEventListener('mouseleave', this.boundHandleMouseLeave);
+      }
     }
   }
 
@@ -81,7 +100,8 @@ export class CursorInteraction {
    * Handle mouse move
    */
   private handleMouseMove(e: MouseEvent): void {
-    const rect = this.canvas.getBoundingClientRect();
+    // Use container rect for accurate coordinates (not canvas rect)
+    const rect = this.container.getBoundingClientRect();
     const newX = e.clientX - rect.left;
     const newY = e.clientY - rect.top;
 
@@ -102,7 +122,7 @@ export class CursorInteraction {
    */
   private handleMouseEnter(e: MouseEvent): void {
     this.isActive = true;
-    const rect = this.canvas.getBoundingClientRect();
+    const rect = this.container.getBoundingClientRect();
     this.cursorX = e.clientX - rect.left;
     this.cursorY = e.clientY - rect.top;
     this.prevCursorX = this.cursorX;
@@ -126,7 +146,7 @@ export class CursorInteraction {
     if (e.touches.length > 0) {
       this.isActive = true;
       const touch = e.touches[0];
-      const rect = this.canvas.getBoundingClientRect();
+      const rect = this.container.getBoundingClientRect();
       this.cursorX = touch.clientX - rect.left;
       this.cursorY = touch.clientY - rect.top;
       this.prevCursorX = this.cursorX;
@@ -142,7 +162,7 @@ export class CursorInteraction {
   private handleTouchMove(e: TouchEvent): void {
     if (e.touches.length > 0) {
       const touch = e.touches[0];
-      const rect = this.canvas.getBoundingClientRect();
+      const rect = this.container.getBoundingClientRect();
       const newX = touch.clientX - rect.left;
       const newY = touch.clientY - rect.top;
 
