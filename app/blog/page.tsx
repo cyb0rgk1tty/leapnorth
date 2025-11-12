@@ -14,7 +14,7 @@ import { AnimatedSection } from "@/app/components/animated/AnimatedSection";
 import { AnimatedCard } from "@/app/components/animated/AnimatedCard";
 import { getAllPosts, getAllCategories } from "@/app/lib/mdx";
 import Link from "next/link";
-import { Clock, Calendar } from "lucide-react";
+import { ClockIcon, CalendarIcon } from "@radix-ui/react-icons";
 
 export const metadata = {
   title: "Blog | Marketing & Automation Insights",
@@ -143,7 +143,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                           <div className="flex items-center justify-between mb-2">
                             <Badge variant="outline">{post.category}</Badge>
                             <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                              <Clock className="h-3 w-3" />
+                              <ClockIcon className="h-3 w-3" />
                               <span>{post.readingTime}</span>
                             </div>
                           </div>
@@ -157,7 +157,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         <CardContent>
                           <div className="flex items-center gap-4 text-sm text-muted-foreground">
                             <div className="flex items-center gap-1">
-                              <Calendar className="h-3 w-3" />
+                              <CalendarIcon className="h-3 w-3" />
                               <time dateTime={post.date}>
                                 {new Date(post.date).toLocaleDateString("en-US", {
                                   year: "numeric",

@@ -114,8 +114,10 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center text-base text-muted-foreground">
           <p>&copy; {currentYear} Leap North Company. All rights reserved.</p>
           <div className="flex items-center gap-2 my-4 md:my-0">
-            <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24" aria-label="Maple Leaf">
-              <path d="M12 2l1.5 4.5L18 4.5l-2.5 4L20 10l-5 1 2 5h-3.5L12 20l-1.5-4H7l2-5-5-1 4.5-1.5L6 4.5l4.5 2L12 2z"/>
+            <svg className="w-6 h-4" viewBox="0 0 640 480" aria-label="Canadian Flag">
+              <path fill="#fff" d="M0 0h640v480H0z"/>
+              <path fill="#d52b1e" d="M0 0h213.3v480H0zm426.7 0h213.3v480H426.7z"/>
+              <path fill="#d52b1e" d="m318 139.5-26.5 191.2 25-8.3-10 25 35-17.5-7.5 25.8h17.5l-7.5-25.8 35 17.5-10-25 25 8.3-26.5-191.2z"/>
             </svg>
             <span className="font-semibold">Proudly Canadian</span>
           </div>

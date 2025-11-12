@@ -2,13 +2,22 @@
 
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Badge } from "@/app/components/ui/badge";
 import { Button } from "@/app/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card";
 import { Separator } from "@/app/components/ui/separator";
-import { ArrowLeft, Target, Lightbulb, TrendingUp, Quote } from "lucide-react";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/app/components/ui/chart";
-import { Bar, BarChart, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts";
+import { Skeleton } from "@/app/components/ui/skeleton";
+import { ArrowLeftIcon, TargetIcon, LightningBoltIcon, BarChartIcon, QuoteIcon } from "@radix-ui/react-icons";
+
+// Lazy load the chart component
+const CaseStudyChart = dynamic(
+  () => import("@/app/components/case-studies/CaseStudyChart").then(mod => ({ default: mod.CaseStudyChart })),
+  {
+    ssr: false,
+    loading: () => <Skeleton className="h-[300px] w-full" />
+  }
+);
 
 // Case study data (in a real app, this would come from a database or CMS)
 const caseStudies = [
@@ -141,7 +150,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <div className="max-w-6xl mx-auto px-4 py-8">
         <Link href="/case-studies">
           <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeftIcon className="h-4 w-4" />
             Back to Case Studies
           </Button>
         </Link>
@@ -197,7 +206,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 bg-primary/10 rounded-lg">
-                <Target className="h-6 w-6 text-primary" />
+                <TargetIcon className="h-6 w-6 text-primary" />
               </div>
               <h2 className="text-3xl font-bold">The Challenge</h2>
             </div>
@@ -209,7 +218,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 bg-primary/10 rounded-lg">
-                <Lightbulb className="h-6 w-6 text-primary" />
+                <LightningBoltIcon className="h-6 w-6 text-primary" />
               </div>
               <h2 className="text-3xl font-bold">The Solution</h2>
             </div>
@@ -236,50 +245,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <section className="max-w-6xl mx-auto px-4 py-16">
         <div className="flex items-center gap-3 mb-8">
           <div className="p-2 bg-primary/10 rounded-lg">
-            <TrendingUp className="h-6 w-6 text-primary" />
+            <BarChartIcon className="h-6 w-6 text-primary" />
           </div>
           <h2 className="text-3xl font-bold">Growth Over Time</h2>
         </div>
 
         <Card className="bg-secondary border-border p-6">
-          <ChartContainer
-            config={{
-              primary: {
-                label: Object.keys(study.metrics[0])[1],
-                color: "hsl(var(--primary))",
-              },
-              secondary: {
-                label: Object.keys(study.metrics[0])[2] || "",
-                color: "hsl(var(--primary) / 0.6)",
-              },
-            }}
-            className="h-[400px] w-full"
-          >
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={study.metrics}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis
-                  dataKey="name"
-                  stroke="hsl(var(--muted-foreground))"
-                  fontSize={12}
-                />
-                <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-                <ChartTooltip content={<ChartTooltipContent />} />
-                <Bar
-                  dataKey={Object.keys(study.metrics[0])[1]}
-                  fill="hsl(var(--primary))"
-                  radius={[4, 4, 0, 0]}
-                />
-                {Object.keys(study.metrics[0])[2] && (
-                  <Bar
-                    dataKey={Object.keys(study.metrics[0])[2]}
-                    fill="hsl(var(--primary) / 0.6)"
-                    radius={[4, 4, 0, 0]}
-                  />
-                )}
-              </BarChart>
-            </ResponsiveContainer>
-          </ChartContainer>
+          <CaseStudyChart metrics={study.metrics} />
           <p className="text-sm text-muted-foreground text-center mt-4">
             Timeline: {study.timeline}
           </p>
@@ -291,7 +263,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       {/* Testimonial */}
       <section className="max-w-4xl mx-auto px-4 py-16">
         <div className="bg-secondary rounded-lg p-8 md:p-12 relative">
-          <Quote className="absolute top-8 left-8 h-12 w-12 text-primary/20" />
+          <QuoteIcon className="absolute top-8 left-8 h-12 w-12 text-primary/20" />
           <blockquote className="relative z-10">
             <p className="text-2xl md:text-3xl font-medium mb-6 leading-relaxed">
               "{study.testimonial}"

@@ -36,6 +36,7 @@ function LogoSet() {
             alt={`${company.name} logo`}
             width={120}
             height={48}
+            loading="lazy"
             className={
               company.slug === 'pandora' || company.slug === 'canadian-cancer-society' || company.slug === 'mederma'
                 ? 'h-10 object-contain'

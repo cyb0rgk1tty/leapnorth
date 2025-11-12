@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Badge } from "@/app/components/ui/badge";
 import { Button } from "@/app/components/ui/button";
 import { Separator } from "@/app/components/ui/separator";
-import { ArrowLeft, Calendar, Clock, User, Share2 } from "lucide-react";
+import { ArrowLeftIconIcon, CalendarIconIcon, ClockIconIcon, PersonIcon, Share1Icon } from "@radix-ui/react-icons";
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/app/lib/mdx";
 import type { Metadata } from "next";
 
@@ -72,7 +72,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <div className="max-w-4xl mx-auto px-4 py-8">
         <Link href="/blog">
           <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeftIcon className="h-4 w-4" />
             Back to Blog
           </Button>
         </Link>
@@ -97,11 +97,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Meta Information */}
           <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
-              <User className="h-4 w-4" />
+              <PersonIcon className="h-4 w-4" />
               <span>{post.author}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4" />
+              <CalendarIcon className="h-4 w-4" />
               <time dateTime={post.date}>
                 {new Date(post.date).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -111,7 +111,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </time>
             </div>
             <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
+              <ClockIcon className="h-4 w-4" />
               <span>{post.readingTime}</span>
             </div>
           </div>
@@ -153,7 +153,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {/* Share Buttons */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Share2 className="h-5 w-5 text-muted-foreground" />
+            <Share1Icon className="h-5 w-5 text-muted-foreground" />
             <span className="text-sm text-muted-foreground">Share this article:</span>
           </div>
           <div className="flex gap-2">
@@ -236,7 +236,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         {relatedPost.description}
                       </p>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Clock className="h-3 w-3" />
+                        <ClockIcon className="h-3 w-3" />
                         <span>{relatedPost.readingTime}</span>
                       </div>
                     </div>
