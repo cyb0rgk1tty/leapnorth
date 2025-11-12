@@ -7,6 +7,7 @@ import { Badge } from "@/app/components/ui/badge";
 import { AnimatedSection } from "@/app/components/animated/AnimatedSection";
 import { AnimatedCard } from "@/app/components/animated/AnimatedCard";
 import { NumberCounter } from "@/app/components/animated/NumberCounter";
+import { AlgorithmicBackground } from "@/app/components/home/AlgorithmicBackground";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, staggerItem } from "@/app/lib/animations/variants";
 import Link from "next/link";
@@ -16,7 +17,10 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 pt-16">
-        <div className="max-w-7xl mx-auto text-center">
+        {/* Algorithmic Background */}
+        <AlgorithmicBackground />
+
+        <div className="max-w-7xl mx-auto text-center relative z-10">
           <motion.div
             initial="initial"
             animate="animate"
