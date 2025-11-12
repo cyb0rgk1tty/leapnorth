@@ -20,7 +20,6 @@ export function AlgorithmicBackground() {
   const animationFrameRef = useRef<number | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isLowEnd, setIsLowEnd] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -34,24 +33,10 @@ export function AlgorithmicBackground() {
   const shouldDisable = prefersReducedMotion || isLowEnd;
 
   /**
-   * Initialize canvas and particle system
+   * Set up particle system (immediately, no load delay)
    */
   useEffect(() => {
-    // Wait for page to load before initializing
-    if (document.readyState === 'complete') {
-      setIsLoaded(true);
-    } else {
-      const handleLoad = () => setIsLoaded(true);
-      window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
-    }
-  }, []);
-
-  /**
-   * Set up particle system
-   */
-  useEffect(() => {
-    if (!isLoaded || shouldDisable || !canvasRef.current) return;
+    if (shouldDisable || !canvasRef.current || !containerRef.current) return;
 
     const canvas = canvasRef.current;
     const config = getDeviceConfig();
@@ -112,9 +97,21 @@ export function AlgorithmicBackground() {
     // Start animation
     animationFrameRef.current = requestAnimationFrame(animate);
 
-    // Handle window resize
+    // Handle window resize - also recreate cursor interaction
     const handleResize = debounce(() => {
       updateCanvasSize();
+
+      // Recreate cursor interaction to ensure it works at new size
+      if (cursorInteractionRef.current) {
+        cursorInteractionRef.current.detachListeners();
+      }
+      if (containerRef.current && particleSystemRef.current) {
+        cursorInteractionRef.current = new CursorInteraction(
+          containerRef.current,
+          particleSystemRef.current,
+          canvas
+        );
+      }
     }, 250);
 
     window.addEventListener('resize', handleResize);
@@ -132,7 +129,7 @@ export function AlgorithmicBackground() {
       }
       window.removeEventListener('resize', handleResize);
     };
-  }, [isLoaded, shouldDisable, isVisible]);
+  }, [shouldDisable, isVisible]);
 
   /**
    * Set up intersection observer to pause when off-screen
