@@ -74,21 +74,21 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
               <div className="text-5xl md:text-6xl font-bold text-primary mb-2">
-                <NumberCounter end={150} suffix="+" />
+                <NumberCounter end={50} suffix="+" />
               </div>
               <p className="text-muted-foreground">Projects Completed</p>
             </div>
             <div>
               <div className="text-5xl md:text-6xl font-bold text-primary mb-2">
-                <NumberCounter end={98} suffix="%" />
+                <NumberCounter end={350} prefix="$" suffix="M+" />
               </div>
-              <p className="text-muted-foreground">Client Satisfaction</p>
+              <p className="text-muted-foreground">Budget Managed</p>
             </div>
             <div>
               <div className="text-5xl md:text-6xl font-bold text-primary mb-2">
-                <NumberCounter end={50} suffix="+" />
+                <NumberCounter end={10} suffix="+" />
               </div>
-              <p className="text-muted-foreground">Team Members</p>
+              <p className="text-muted-foreground">Years of Experience</p>
             </div>
           </div>
         </div>
