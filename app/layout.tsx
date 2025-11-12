@@ -5,6 +5,7 @@ import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
 import { Analytics } from "@/app/components/Analytics";
 import { Toaster } from "@/app/components/ui/sonner";
+import { organizationSchema, renderJsonLd } from "@/app/lib/structured-data";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,7 +29,7 @@ const archivoBlack = Archivo_Black({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://leapnorth.com'), // Update with actual domain
+  metadataBase: new URL('https://leapnorth.co'),
   title: {
     default: "Leap North | True North. True Growth.",
     template: "%s | Leap North"
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://leapnorth.com",
+    url: "https://leapnorth.co",
     title: "Leap North | True North. True Growth.",
     description: "Your True North for growth. Transform your business through integrated marketing and intelligent automation",
     siteName: "Leap North",
@@ -84,6 +85,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={renderJsonLd(organizationSchema)}
+        />
+      </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} ${archivoBlack.variable} font-sans antialiased`}>
         <Header />
         {children}

@@ -10,6 +10,7 @@ import { NumberCounter } from "@/app/components/animated/NumberCounter";
 import { motion } from "framer-motion";
 import { staggerContainer, staggerItem } from "@/app/lib/animations/variants";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function AboutPage() {
   const team = [
@@ -42,19 +43,23 @@ export default function AboutPage() {
   const values = [
     {
       title: "Results-Driven",
-      description: "We focus on metrics that matter. Every strategy is designed to deliver measurable ROI and tangible business growth."
+      description: "We focus on metrics that matter. Every strategy is designed to deliver measurable ROI and tangible business growth.",
+      image: "/images/about/growth-value.png"
     },
     {
       title: "Transparency",
-      description: "Clear communication, honest reporting, and full visibility into our processes and your campaign performance."
+      description: "Clear communication, honest reporting, and full visibility into our processes and your campaign performance.",
+      image: "/images/about/integrity-value.png"
     },
     {
       title: "Innovation",
-      description: "We stay ahead of industry trends, leveraging the latest tools and technologies to give you a competitive edge."
+      description: "We stay ahead of industry trends, leveraging the latest tools and technologies to give you a competitive edge.",
+      image: "/images/about/innovation-value.png"
     },
     {
       title: "Partnership",
-      description: "We're not just a vendor—we're your growth partner, invested in your long-term success."
+      description: "We're not just a vendor—we're your growth partner, invested in your long-term success.",
+      image: "/images/about/excellence-value.png"
     }
   ];
 
@@ -121,11 +126,24 @@ export default function AboutPage() {
 
       {/* Mission Section */}
       <AnimatedSection className="py-24 px-4 bg-secondary">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Our Mission</h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            To empower businesses of all sizes to achieve sustainable growth through the perfect blend of strategic marketing and intelligent automation. We believe that every business deserves access to enterprise-level growth strategies and cutting-edge technology—without the enterprise price tag.
-          </p>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden">
+              <Image
+                src="/images/about/team-collaboration.png"
+                alt="Team Collaboration"
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">Our Mission</h2>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                To empower businesses of all sizes to achieve sustainable growth through the perfect blend of strategic marketing and intelligent automation. We believe that every business deserves access to enterprise-level growth strategies and cutting-edge technology—without the enterprise price tag.
+              </p>
+            </div>
+          </div>
         </div>
       </AnimatedSection>
 
@@ -150,10 +168,17 @@ export default function AboutPage() {
               <motion.div key={index} variants={staggerItem}>
                 <AnimatedCard>
                   <Card className="h-full border-border bg-accent hover:border-primary transition-colors duration-300">
-                    <CardHeader>
-                      <CardTitle className="text-2xl">{value.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
+                    <CardContent className="pt-6">
+                      <div className="relative h-48 mb-6 rounded-lg overflow-hidden">
+                        <Image
+                          src={value.image}
+                          alt={value.title}
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                      </div>
+                      <CardTitle className="text-2xl mb-4">{value.title}</CardTitle>
                       <p className="text-muted-foreground">{value.description}</p>
                     </CardContent>
                   </Card>

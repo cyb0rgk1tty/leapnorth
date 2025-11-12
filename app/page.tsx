@@ -98,7 +98,7 @@ export default function Home() {
       <AnimatedSection className="py-24 px-4 bg-secondary">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <Badge className="mb-4" variant="outline">Our Services</Badge>
+            <Badge className="mb-4 text-sm px-4 py-1" variant="outline">Our Services</Badge>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
               What We Do
             </h2>
@@ -124,10 +124,10 @@ export default function Home() {
                       </svg>
                     </div>
                     <CardTitle className="text-2xl mb-2">Marketing & Growth</CardTitle>
-                    <CardDescription>Drive measurable results with data-driven marketing strategies</CardDescription>
+                    <CardDescription className="text-base">Drive measurable results with data-driven marketing strategies</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-3 text-muted-foreground">
+                    <ul className="space-y-3 text-base text-muted-foreground">
                       <li className="flex items-start">
                         <span className="text-primary mr-2">✓</span>
                         <span>SEO & Content Marketing</span>
@@ -165,10 +165,10 @@ export default function Home() {
                       </svg>
                     </div>
                     <CardTitle className="text-2xl mb-2">Business Automation</CardTitle>
-                    <CardDescription>Scale operations with intelligent automation systems</CardDescription>
+                    <CardDescription className="text-base">Scale operations with intelligent automation systems</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-3 text-muted-foreground">
+                    <ul className="space-y-3 text-base text-muted-foreground">
                       <li className="flex items-start">
                         <span className="text-primary mr-2">✓</span>
                         <span>Workflow Automation (Zapier, Make, n8n)</span>
@@ -197,7 +197,7 @@ export default function Home() {
           </motion.div>
 
           <div className="text-center mt-12">
-            <Button size="lg" asChild variant="outline">
+            <Button size="lg" asChild variant="outline" className="text-base">
               <Link href="/services">View All Services</Link>
             </Button>
           </div>

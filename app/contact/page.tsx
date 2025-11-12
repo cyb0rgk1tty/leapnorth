@@ -42,14 +42,32 @@ export default function ContactPage() {
     try {
       contactSchema.parse(formData);
 
-      // Simulate form submission
-      setTimeout(() => {
+      // Submit to API
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setFormStatus("success");
         setFormData({ name: "", email: "", company: "", phone: "", service: "", message: "" });
 
         // Reset success message after 5 seconds
         setTimeout(() => setFormStatus("idle"), 5000);
-      }, 1500);
+      } else {
+        setFormStatus("error");
+        setErrors({ message: data.error || "Failed to send message. Please try again." });
+      }
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
@@ -60,6 +78,9 @@ export default function ContactPage() {
         });
         setErrors(fieldErrors);
         setFormStatus("error");
+      } else {
+        setFormStatus("error");
+        setErrors({ message: "An unexpected error occurred. Please try again." });
       }
     }
   };

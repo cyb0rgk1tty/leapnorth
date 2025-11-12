@@ -17,6 +17,10 @@ const companies = [
   { name: "Canadian Cancer Society", slug: "canadian-cancer-society" },
   { name: "Chick-fil-A", slug: "chick-fil-a" },
   { name: "Kawai", slug: "kawai" },
+  { name: "Merz Pharma", slug: "merz-pharma" },
+  { name: "Compeed", slug: "compeed" },
+  { name: "Mederma", slug: "mederma" },
+  { name: "Vertex Pharmaceuticals", slug: "vertex-pharmaceuticals" },
 ];
 
 function LogoSet() {
@@ -28,12 +32,25 @@ function LogoSet() {
           className="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-300"
         >
           <Image
-            src={`/images/logos/${company.slug}.${company.slug === 'telus' ? 'png' : 'svg'}`}
+            src={`/images/logos/${company.slug}.${['telus', 'merz-pharma', 'compeed'].includes(company.slug) ? 'png' : 'svg'}`}
             alt={`${company.name} logo`}
             width={120}
             height={48}
-            className={company.slug === 'pandora' || company.slug === 'canadian-cancer-society' ? 'h-10 object-contain' : 'h-12 object-contain'}
-            style={{ width: 'auto', height: company.slug === 'pandora' || company.slug === 'canadian-cancer-society' ? '2.5rem' : '3rem' }}
+            className={
+              company.slug === 'pandora' || company.slug === 'canadian-cancer-society' || company.slug === 'mederma'
+                ? 'h-10 object-contain'
+                : company.slug === 'vertex-pharmaceuticals'
+                ? 'h-14 object-contain'
+                : 'h-12 object-contain'
+            }
+            style={{
+              width: 'auto',
+              height: company.slug === 'pandora' || company.slug === 'canadian-cancer-society' || company.slug === 'mederma'
+                ? '2.5rem'
+                : company.slug === 'vertex-pharmaceuticals'
+                ? '3.5rem'
+                : '3rem'
+            }}
           />
         </div>
       ))}

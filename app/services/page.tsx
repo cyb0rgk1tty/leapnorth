@@ -8,6 +8,7 @@ import { AnimatedCard } from "@/app/components/animated/AnimatedCard";
 import { motion } from "framer-motion";
 import { staggerContainer, staggerItem } from "@/app/lib/animations/variants";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ServicesPage() {
   const marketingServices = [
@@ -144,14 +145,25 @@ export default function ServicesPage() {
       {/* Marketing Services */}
       <AnimatedSection className="py-24 px-4" id="marketing">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <Badge className="mb-4">Marketing & Growth</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Marketing Services
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl">
-              Drive measurable results with data-driven marketing strategies that attract, engage, and convert your target audience.
-            </p>
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+              <Badge className="mb-4">Marketing & Growth</Badge>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                Marketing Services
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Drive measurable results with data-driven marketing strategies that attract, engage, and convert your target audience.
+              </p>
+            </div>
+            <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden">
+              <Image
+                src="/images/services/marketing-services.png"
+                alt="Marketing and Growth Services"
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
           </div>
 
           <motion.div
@@ -190,14 +202,25 @@ export default function ServicesPage() {
       {/* Automation Services */}
       <AnimatedSection className="py-24 px-4 bg-secondary" id="automation">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <Badge className="mb-4">Business Automation</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Automation Services
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl">
-              Scale your operations with intelligent automation systems that save time, reduce errors, and improve efficiency.
-            </p>
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden order-2 md:order-1">
+              <Image
+                src="/images/services/automation-services.png"
+                alt="Business Automation Services"
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+            <div className="order-1 md:order-2">
+              <Badge className="mb-4">Business Automation</Badge>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                Automation Services
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Scale your operations with intelligent automation systems that save time, reduce errors, and improve efficiency.
+              </p>
+            </div>
           </div>
 
           <motion.div

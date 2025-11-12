@@ -10,21 +10,21 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-foreground">Leap North</h3>
-            <p className="text-sm text-muted-foreground">
+            <h3 className="text-lg font-brand text-foreground tracking-normal uppercase">LEAP NORTH</h3>
+            <p className="text-base text-muted-foreground font-semibold">
               True North. True Growth.
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-base text-muted-foreground">
               Transform your business through integrated marketing and intelligent automation.
             </p>
           </div>
 
           {/* Services */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+            <h4 className="text-base font-semibold text-foreground uppercase tracking-wider">
               Services
             </h4>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-base">
               <li>
                 <Link href="/services#marketing" className="text-muted-foreground hover:text-primary transition-colors">
                   Marketing & Growth
@@ -50,10 +50,10 @@ export function Footer() {
 
           {/* Company */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+            <h4 className="text-base font-semibold text-foreground uppercase tracking-wider">
               Company
             </h4>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-base">
               <li>
                 <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
                   About Us
@@ -79,10 +79,10 @@ export function Footer() {
 
           {/* Contact */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+            <h4 className="text-base font-semibold text-foreground uppercase tracking-wider">
               Get in Touch
             </h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="space-y-2 text-base text-muted-foreground">
               <li>
                 <a href="mailto:hello@leapnorth.co" className="hover:text-primary transition-colors">
                   hello@leapnorth.co
@@ -111,8 +111,14 @@ export function Footer() {
 
         <Separator className="my-8" />
 
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; {currentYear} Leap North Agency. All rights reserved.</p>
+        <div className="flex flex-col md:flex-row justify-between items-center text-base text-muted-foreground">
+          <p>&copy; {currentYear} Leap North Company. All rights reserved.</p>
+          <div className="flex items-center gap-2 my-4 md:my-0">
+            <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24" aria-label="Maple Leaf">
+              <path d="M12 2l1.5 4.5L18 4.5l-2.5 4L20 10l-5 1 2 5h-3.5L12 20l-1.5-4H7l2-5-5-1 4.5-1.5L6 4.5l4.5 2L12 2z"/>
+            </svg>
+            <span className="font-semibold">Proudly Canadian</span>
+          </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link href="/privacy" className="hover:text-primary transition-colors">
               Privacy Policy
