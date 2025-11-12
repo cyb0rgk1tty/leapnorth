@@ -47,12 +47,12 @@ export const PARTICLE_CONFIG = {
     hoverAlpha: 0.5,         // Increased from 0.35
   },
 
-  // Cursor interaction
+  // Cursor interaction (repulsion-only for fluid flow effect)
   cursor: {
-    attractionRadius: 200,
-    attractionStrength: 0.8,      // Pull particles from far away
-    repulsionRadius: 80,           // Push particles away when close
-    repulsionStrength: 0.15,       // Very gentle, smooth push when close
+    attractionRadius: 200,         // Not used (no attraction)
+    attractionStrength: 0,         // No attraction
+    repulsionRadius: 80,           // Not used
+    repulsionStrength: 0.25,       // Gentle push - particles flow away smoothly
     speedMultiplier: 1.5,
     colorShiftIntensity: 0.3,
   },

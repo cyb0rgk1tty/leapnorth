@@ -101,32 +101,17 @@ export class ParticleSystem {
       if (this.cursorActive) {
         const dist = distance(particle.x, particle.y, this.cursorX, this.cursorY);
 
-        // Repulsion zone - push particles away when cursor is close
-        if (dist < repulsionRadius && dist > 0) {
-          // Very smooth force curve for ultra-fluid motion (exponential falloff)
-          const force = Math.pow((repulsionRadius - dist) / repulsionRadius, 2.5);
-          const angle = Math.atan2(particle.y - this.cursorY, particle.x - this.cursorX); // Reversed for repulsion
+        // Push particles away when cursor is nearby (fluid repulsion only)
+        if (dist < cursorRadius && dist > 0) {
+          // Very smooth force curve for ultra-fluid motion
+          const force = Math.pow((cursorRadius - dist) / cursorRadius, 2);
+          const angle = Math.atan2(particle.y - this.cursorY, particle.x - this.cursorX);
 
           particle.vx += Math.cos(angle) * force * repulsionStrength;
           particle.vy += Math.sin(angle) * force * repulsionStrength;
 
           // Alpha boost when being repelled
-          particle.alpha = lerp(particle.alpha, hoverAlpha, 0.2);
-        }
-        // Attraction zone - pull particles toward cursor from medium distance
-        else if (dist >= repulsionRadius && dist < cursorRadius) {
-          const force = (cursorRadius - dist) / cursorRadius;
-          const angle = Math.atan2(this.cursorY - particle.y, this.cursorX - particle.x);
-
-          particle.vx += Math.cos(angle) * force * attractionStrength;
-          particle.vy += Math.sin(angle) * force * attractionStrength;
-
-          // Speed multiplier
-          particle.vx *= speedMultiplier;
-          particle.vy *= speedMultiplier;
-
-          // Alpha boost
-          particle.alpha = lerp(particle.alpha, hoverAlpha, 0.1);
+          particle.alpha = lerp(particle.alpha, hoverAlpha, 0.15);
         } else {
           // Return to base alpha
           particle.alpha = lerp(particle.alpha, baseAlpha, 0.05);
