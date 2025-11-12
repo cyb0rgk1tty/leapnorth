@@ -285,12 +285,41 @@
     color: #005cc5;
   }
 
-  /* Ultra-bold brand name styling */
+  /* Ultra-bold brand name styling for Bebas Neue */
   .brand-name-ultra-bold {
-    font-weight: 950;
-    letter-spacing: -0.02em;
-    -webkit-text-stroke: 0.5px currentColor;
-    text-stroke: 0.5px currentColor;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    -webkit-text-stroke: 2.5px currentColor;
+    text-stroke: 2.5px currentColor;
     paint-order: stroke fill;
+    text-shadow:
+      2px 0 0 currentColor,
+      -2px 0 0 currentColor,
+      0 2px 0 currentColor,
+      0 -2px 0 currentColor,
+      1px 1px 0 currentColor,
+      -1px -1px 0 currentColor,
+      1px -1px 0 currentColor,
+      -1px 1px 0 currentColor,
+      2px 2px 0 currentColor,
+      -2px -2px 0 currentColor,
+      2px -2px 0 currentColor,
+      -2px 2px 0 currentColor;
+  }
+
+  /* Medium bold version for header logo */
+  .brand-name-header {
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    -webkit-text-stroke: 1px currentColor;
+    text-stroke: 1px currentColor;
+    paint-order: stroke fill;
+    text-shadow:
+      1px 0 0 currentColor,
+      -1px 0 0 currentColor,
+      0 1px 0 currentColor,
+      0 -1px 0 currentColor,
+      1px 1px 0 currentColor,
+      -1px -1px 0 currentColor;
   }
 }

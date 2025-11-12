@@ -8,6 +8,7 @@ import { AnimatedSection } from "@/app/components/animated/AnimatedSection";
 import { AnimatedCard } from "@/app/components/animated/AnimatedCard";
 import { NumberCounter } from "@/app/components/animated/NumberCounter";
 import { AlgorithmicBackground } from "@/app/components/home/AlgorithmicBackground";
+import { LogoSlider } from "@/app/components/home/LogoSlider";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, staggerItem } from "@/app/lib/animations/variants";
 import Link from "next/link";
@@ -16,47 +17,54 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 pt-16">
+      <section className="relative min-h-screen flex flex-col">
         {/* Algorithmic Background */}
         <AlgorithmicBackground />
 
-        <div className="max-w-7xl mx-auto text-center relative z-20">
-          <motion.div
-            initial="initial"
-            animate="animate"
-            variants={staggerContainer}
-          >
-            <motion.h1
-              variants={staggerItem}
-              className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 text-foreground tracking-tight brand-name-ultra-bold"
-            >
-              Leap North
-            </motion.h1>
-            <motion.p
-              variants={staggerItem}
-              className="text-2xl md:text-4xl lg:text-5xl font-semibold mb-6 text-primary"
-            >
-              True North. True Growth.
-            </motion.p>
-            <motion.p
-              variants={staggerItem}
-              className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8"
-            >
-              Transform your business through integrated marketing strategies and intelligent automation,
-              delivering measurable growth and operational efficiency.
-            </motion.p>
+        <div className="flex-1 flex items-center justify-center px-4 pt-16">
+          <div className="max-w-7xl mx-auto text-center relative z-20">
             <motion.div
-              variants={staggerItem}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial="initial"
+              animate="animate"
+              variants={staggerContainer}
             >
-              <Button size="lg" asChild className="text-lg px-8 py-6">
-                <Link href="/contact">Get Started</Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild className="text-lg px-8 py-6">
-                <Link href="/services">Learn More</Link>
-              </Button>
+              <motion.h1
+                variants={staggerItem}
+                className="text-6xl md:text-8xl lg:text-9xl font-brand mb-6 text-foreground tracking-normal uppercase"
+              >
+                LEAP NORTH
+              </motion.h1>
+              <motion.p
+                variants={staggerItem}
+                className="text-2xl md:text-4xl lg:text-5xl font-semibold mb-6 text-primary"
+              >
+                True North. True Growth.
+              </motion.p>
+              <motion.p
+                variants={staggerItem}
+                className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8"
+              >
+                Transform your business through integrated marketing strategies and intelligent automation,
+                delivering measurable growth and operational efficiency.
+              </motion.p>
+              <motion.div
+                variants={staggerItem}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <Button size="lg" asChild className="text-lg px-8 py-6">
+                  <Link href="/contact">Get Started</Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild className="text-lg px-8 py-6">
+                  <Link href="/services">Learn More</Link>
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
+        </div>
+
+        {/* Logo Slider at bottom of hero */}
+        <div className="relative z-20">
+          <LogoSlider />
         </div>
       </section>
 

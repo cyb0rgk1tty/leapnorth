@@ -23,7 +23,7 @@ export function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-black text-foreground tracking-tight brand-name-ultra-bold">Leap North</span>
+            <span className="text-2xl font-brand text-foreground tracking-normal uppercase">LEAP NORTH</span>
           </Link>
 
           {/* Desktop Navigation */}

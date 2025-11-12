@@ -56,17 +56,16 @@ export default {
   				'system-ui',
   				'sans-serif'
   			],
-  			heading: [
-  				'var(--font-inter-tight)',
-  				'var(--font-inter)',
-  				'system-ui',
-  				'sans-serif'
-  			],
   			mono: [
   				'var(--font-jetbrains-mono)',
   				'Consolas',
   				'Monaco',
   				'monospace'
+  			],
+  			brand: [
+  				'var(--font-archivo-black)',
+  				'Impact',
+  				'sans-serif'
   			]
   		},
   		borderRadius: {
