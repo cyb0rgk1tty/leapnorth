@@ -13,19 +13,20 @@ import Link from "next/link";
 export default function CaseStudiesPage() {
   const caseStudies = [
     {
-      slug: "techstart-solutions-seo-success",
-      client: "TechStart Solutions",
-      industry: "B2B SaaS",
-      challenge: "Low organic traffic and poor lead generation from website",
-      solution: "Comprehensive SEO strategy with content marketing and conversion optimization",
+      slug: "major-telecom-cpa-optimization",
+      client: "Major Telecommunications Company",
+      industry: "Telecommunications",
+      challenge: "Facing high cost per acquisition across biddable channels with 12+ competing campaigns causing cannibalization and increased costs. Unable to meet Q4 acquisition benchmarks while stuck in #3 market position behind aggressive competitors.",
+      solution: "Strategic campaign consolidation from 12+ campaigns to 6 streamlined always-on campaigns, eliminating internal competition. Comprehensive paid media optimization across all biddable channels with advanced audience segmentation and bid strategy refinement. Doubled retention rate and drove 20% YoY increase in client satisfaction.",
       results: [
-        { label: "Organic Traffic", value: 285, suffix: "%" },
-        { label: "Qualified Leads", value: 420, suffix: "%" },
-        { label: "Conversion Rate", value: 3.2, suffix: "x", decimals: 1 }
+        { label: "Cost Per Acquisition Decrease", value: 200, suffix: "%" },
+        { label: "Campaign Efficiency", value: 50, suffix: "%" },
+        { label: "Market Position", value: 3, prefix: "#", suffix: " → #2" },
+        { label: "Q4 Performance", prefix: "#1 ", value: "Q4 performance", suffix: " within past decade" }
       ],
-      services: ["SEO", "Content Marketing", "CRO"],
-      testimonial: "Leap North transformed our digital presence. We're now ranking #1 for our target keywords and generating consistent qualified leads.",
-      author: "Sarah Chen, CMO"
+      services: ["Paid Media Optimization", "Performance Marketing"],
+      testimonial: "",
+      author: ""
     },
     {
       slug: "growthco-retail-automation",
@@ -104,20 +105,21 @@ export default function CaseStudiesPage() {
       </section>
 
       {/* Case Studies Grid */}
-      <AnimatedSection className="py-24 px-4">
+      <section className="py-24 px-4">
         <div className="max-w-7xl mx-auto space-y-24">
           {caseStudies.map((study, index) => (
             <motion.div
               key={index}
-              initial="initial"
-              whileInView="animate"
+              initial={index === 0 ? false : "initial"}
+              animate={index === 0 ? undefined : undefined}
+              whileInView={index > 0 ? "animate" : undefined}
               viewport={{ once: true, amount: 0.2 }}
-              variants={staggerContainer}
+              variants={index === 0 ? undefined : staggerContainer}
               className={index % 2 === 1 ? "bg-secondary p-8 md:p-12 rounded-2xl" : ""}
             >
               <div className="grid md:grid-cols-2 gap-12 items-start">
                 {/* Left Column - Info */}
-                <motion.div variants={staggerItem} className="space-y-6">
+                <motion.div variants={index === 0 ? undefined : staggerItem} className="space-y-6">
                   <div>
                     <h2 className="text-3xl md:text-4xl font-bold mb-2">{study.client}</h2>
                     <p className="text-muted-foreground text-lg">{study.industry}</p>
@@ -139,17 +141,19 @@ export default function CaseStudiesPage() {
                     ))}
                   </div>
 
-                  <Card className="border-primary/20 bg-accent">
-                    <CardContent className="pt-6">
-                      <p className="text-muted-foreground italic mb-4">"{study.testimonial}"</p>
-                      <p className="font-semibold">— {study.author}</p>
-                    </CardContent>
-                  </Card>
+                  {study.testimonial && study.author && (
+                    <Card className="border-primary/20 bg-accent">
+                      <CardContent className="pt-6">
+                        <p className="text-muted-foreground italic mb-4">"{study.testimonial}"</p>
+                        <p className="font-semibold">— {study.author}</p>
+                      </CardContent>
+                    </Card>
+                  )}
                 </motion.div>
 
                 {/* Right Column - Results */}
-                <motion.div variants={staggerItem}>
-                  <AnimatedCard>
+                <motion.div variants={index === 0 ? undefined : staggerItem}>
+                  {index === 0 ? (
                     <Card className="border-border bg-accent">
                       <CardHeader>
                         <CardTitle className="text-2xl">Results</CardTitle>
@@ -159,16 +163,31 @@ export default function CaseStudiesPage() {
                         {study.results.map((result, i) => (
                           <div key={i} className="space-y-2">
                             <p className="text-sm text-muted-foreground">{result.label}</p>
-                            <div className="flex items-baseline gap-2">
-                              <span className="text-4xl font-bold text-primary">
-                                <NumberCounter
-                                  end={result.value}
-                                  prefix={'prefix' in result ? result.prefix : ""}
-                                  suffix={'suffix' in result ? result.suffix : ""}
-                                  decimals={'decimals' in result ? result.decimals : 0}
-                                />
-                              </span>
-                              <span className="text-muted-foreground">increase</span>
+                            <div className="flex items-baseline gap-2 flex-wrap">
+                              {typeof result.value === 'string' && result.label.includes("Performance") ? (
+                                <>
+                                  <span className="text-4xl font-bold text-primary">{result.prefix}</span>
+                                  <span className="text-muted-foreground">{result.value}{result.suffix}</span>
+                                </>
+                              ) : typeof result.value === 'string' ? (
+                                <span className="text-4xl font-bold text-primary">
+                                  {result.prefix}
+                                  {result.value}
+                                  {result.suffix}
+                                </span>
+                              ) : (
+                                <span className="text-4xl font-bold text-primary">
+                                  <NumberCounter
+                                    end={result.value}
+                                    prefix={'prefix' in result ? result.prefix : ""}
+                                    suffix={'suffix' in result ? result.suffix : ""}
+                                    decimals={'decimals' in result ? result.decimals : 0}
+                                  />
+                                </span>
+                              )}
+                              {!result.label.includes("Position") && !result.label.includes("Performance") && (
+                                <span className="text-muted-foreground">increase</span>
+                              )}
                             </div>
                           </div>
                         ))}
@@ -181,13 +200,62 @@ export default function CaseStudiesPage() {
                         </div>
                       </CardContent>
                     </Card>
-                  </AnimatedCard>
+                  ) : (
+                    <AnimatedCard>
+                      <Card className="border-border bg-accent">
+                        <CardHeader>
+                          <CardTitle className="text-2xl">Results</CardTitle>
+                          <CardDescription>Measurable impact in key metrics</CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                          {study.results.map((result, i) => (
+                            <div key={i} className="space-y-2">
+                              <p className="text-sm text-muted-foreground">{result.label}</p>
+                              <div className="flex items-baseline gap-2 flex-wrap">
+                                {typeof result.value === 'string' && result.label.includes("Performance") ? (
+                                  <>
+                                    <span className="text-4xl font-bold text-primary">{result.prefix}</span>
+                                    <span className="text-muted-foreground">{result.value}{result.suffix}</span>
+                                  </>
+                                ) : typeof result.value === 'string' ? (
+                                  <span className="text-4xl font-bold text-primary">
+                                    {result.prefix}
+                                    {result.value}
+                                    {result.suffix}
+                                  </span>
+                                ) : (
+                                  <span className="text-4xl font-bold text-primary">
+                                    <NumberCounter
+                                      end={result.value}
+                                      prefix={'prefix' in result ? result.prefix : ""}
+                                      suffix={'suffix' in result ? result.suffix : ""}
+                                      decimals={'decimals' in result ? result.decimals : 0}
+                                    />
+                                  </span>
+                                )}
+                                {!result.label.includes("Position") && !result.label.includes("Performance") && (
+                                  <span className="text-muted-foreground">increase</span>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                          <div className="pt-4 border-t border-border">
+                            <Button asChild className="w-full">
+                              <Link href={`/case-studies/${study.slug}`}>
+                                View Full Case Study
+                              </Link>
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </AnimatedCard>
+                  )}
                 </motion.div>
               </div>
             </motion.div>
           ))}
         </div>
-      </AnimatedSection>
+      </section>
 
       {/* CTA Section */}
       <AnimatedSection className="py-24 px-4 border-t border-border">

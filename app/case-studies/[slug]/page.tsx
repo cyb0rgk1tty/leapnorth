@@ -1,52 +1,40 @@
-"use client";
-
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { Badge } from "@/app/components/ui/badge";
 import { Button } from "@/app/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card";
 import { Separator } from "@/app/components/ui/separator";
-import { Skeleton } from "@/app/components/ui/skeleton";
 import { ArrowLeftIcon, TargetIcon, LightningBoltIcon, BarChartIcon, QuoteIcon } from "@radix-ui/react-icons";
-
-// Lazy load the chart component
-const CaseStudyChart = dynamic(
-  () => import("@/app/components/case-studies/CaseStudyChart").then(mod => ({ default: mod.CaseStudyChart })),
-  {
-    ssr: false,
-    loading: () => <Skeleton className="h-[300px] w-full" />
-  }
-);
+import { CaseStudyChart } from "@/app/components/case-studies/CaseStudyChart";
 
 // Case study data (in a real app, this would come from a database or CMS)
 const caseStudies = [
   {
-    slug: "techstart-solutions-seo-success",
-    client: "TechStart Solutions",
-    industry: "B2B SaaS",
+    slug: "major-telecom-cpa-optimization",
+    client: "Major Telecommunications Company",
+    industry: "Telecommunications",
     challenge:
-      "TechStart Solutions struggled with low organic traffic and poor lead generation from their website. Despite having a great product, they were invisible in search results for their target keywords.",
+      "A major telecommunications provider faced escalating costs and inefficiencies across their digital acquisition channels. With 12+ competing campaigns running simultaneously, they experienced severe campaign cannibalization, driving cost per acquisition to unsustainable levels. Despite significant ad spend, they were falling short of Q4 acquisition benchmarks and stuck in #3 market position behind aggressive competitors.",
     solution:
-      "We implemented a comprehensive SEO strategy including technical SEO optimization, content marketing with targeted blog posts and guides, on-page optimization for product pages, and conversion rate optimization to turn visitors into qualified leads.",
+      "We led a comprehensive paid media transformation, consolidating campaigns from 12+ fragmented efforts to 6 strategically designed always-on campaigns. This included advanced audience segmentation to eliminate overlap, refined bid strategies optimized for efficiency, channel-specific performance frameworks, and real-time optimization protocols. The streamlined approach eliminated internal competition while maximizing reach and conversion efficiency across all biddable channels. Additionally, we doubled retention rate and drove a 20% YoY increase in client satisfaction through improved campaign performance and customer engagement.",
     results: [
-      { label: "Organic Traffic", value: 285, suffix: "%" },
-      { label: "Qualified Leads", value: 420, suffix: "%" },
-      { label: "Conversion Rate", value: 3.2, suffix: "x", decimals: 1 },
+      { label: "Cost Per Acquisition Decrease", value: 200, suffix: "%" },
+      { label: "Campaign Efficiency", value: 50, suffix: "%" },
+      { label: "Market Position", value: 3, prefix: "#", suffix: " → #2" },
+      { label: "Q4 Performance", prefix: "#1 ", value: "Q4 performance", suffix: " within past decade" },
     ],
-    services: ["SEO", "Content Marketing", "CRO"],
-    testimonial:
-      "Leap North transformed our digital presence. We're now ranking #1 for our target keywords and generating consistent qualified leads.",
-    author: "Sarah Chen, CMO",
-    image: "/images/case-studies/techstart.png",
-    timeline: "6 months",
+    services: ["Paid Media Optimization", "Performance Marketing"],
+    testimonial: "",
+    author: "",
+    image: "/images/case-studies/telecom.webp",
+    timeline: "Q3-Q4 2024 (6 months)",
     metrics: [
-      { name: "Month 1", traffic: 100, leads: 100 },
-      { name: "Month 2", traffic: 140, leads: 130 },
-      { name: "Month 3", traffic: 190, leads: 180 },
-      { name: "Month 4", traffic: 250, leads: 270 },
-      { name: "Month 5", traffic: 320, leads: 380 },
-      { name: "Month 6", traffic: 385, leads: 520 },
+      { name: "Jul", cpa: 100, acquisitions: 100, campaigns: 12 },
+      { name: "Aug", cpa: 95, acquisitions: 110, campaigns: 12 },
+      { name: "Sep", cpa: 85, acquisitions: 125, campaigns: 10 },
+      { name: "Oct", cpa: 65, acquisitions: 155, campaigns: 6 },
+      { name: "Nov", cpa: 45, acquisitions: 210, campaigns: 6 },
+      { name: "Dec", cpa: 33, acquisitions: 285, campaigns: 6 },
     ],
   },
   {
@@ -178,18 +166,27 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl md:text-5xl font-bold text-primary">
-                    {'prefix' in result && result.prefix}
-                    {result.value}
-                    {'suffix' in result && result.suffix}
-                  </span>
-                  {result.label.includes("Time") ||
-                  result.label.includes("Error") ||
-                  result.label.includes("Cycle") ? (
-                    <span className="text-sm text-muted-foreground">reduction</span>
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  {result.label.includes("Performance") ? (
+                    <>
+                      <span className="text-4xl md:text-5xl font-bold text-primary">{'prefix' in result && result.prefix}</span>
+                      <span className="text-sm text-muted-foreground">{result.value}{'suffix' in result && result.suffix}</span>
+                    </>
                   ) : (
-                    <span className="text-sm text-muted-foreground">increase</span>
+                    <span className="text-4xl md:text-5xl font-bold text-primary">
+                      {'prefix' in result && result.prefix}
+                      {result.value}
+                      {'suffix' in result && result.suffix}
+                    </span>
+                  )}
+                  {!result.label.includes("Position") && !result.label.includes("Performance") && (
+                    result.label.includes("Time") ||
+                    result.label.includes("Error") ||
+                    result.label.includes("Cycle") ? (
+                      <span className="text-sm text-muted-foreground">reduction</span>
+                    ) : (
+                      <span className="text-sm text-muted-foreground">increase</span>
+                    )
                   )}
                 </div>
               </CardContent>
@@ -258,28 +255,32 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </Card>
       </section>
 
-      <Separator />
+      {study.testimonial && study.author && (
+        <>
+          <Separator />
 
-      {/* Testimonial */}
-      <section className="max-w-4xl mx-auto px-4 py-16">
-        <div className="bg-secondary rounded-lg p-8 md:p-12 relative">
-          <QuoteIcon className="absolute top-8 left-8 h-12 w-12 text-primary/20" />
-          <blockquote className="relative z-10">
-            <p className="text-2xl md:text-3xl font-medium mb-6 leading-relaxed">
-              "{study.testimonial}"
-            </p>
-            <footer className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xl font-bold">
-                {study.author.charAt(0)}
-              </div>
-              <div>
-                <p className="font-semibold">{study.author}</p>
-                <p className="text-sm text-muted-foreground">{study.client}</p>
-              </div>
-            </footer>
-          </blockquote>
-        </div>
-      </section>
+          {/* Testimonial */}
+          <section className="max-w-4xl mx-auto px-4 py-16">
+            <div className="bg-secondary rounded-lg p-8 md:p-12 relative">
+              <QuoteIcon className="absolute top-8 left-8 h-12 w-12 text-primary/20" />
+              <blockquote className="relative z-10">
+                <p className="text-2xl md:text-3xl font-medium mb-6 leading-relaxed">
+                  "{study.testimonial}"
+                </p>
+                <footer className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xl font-bold">
+                    {study.author.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-semibold">{study.author}</p>
+                    <p className="text-sm text-muted-foreground">{study.client}</p>
+                  </div>
+                </footer>
+              </blockquote>
+            </div>
+          </section>
+        </>
+      )}
 
       {/* CTA Section */}
       <section className="py-16 px-4 bg-secondary border-t border-border">

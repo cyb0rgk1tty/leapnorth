@@ -55,7 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Case study pages
   const caseStudies = [
-    "techstart-solutions-seo-success",
+    "major-telecom-cpa-optimization",
     "growthco-retail-automation",
     "fintech-innovations-ai-chatbot",
     "localservice-pro-local-seo",

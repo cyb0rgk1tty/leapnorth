@@ -80,7 +80,7 @@ export function LogoSlider() {
     <div className="w-full py-12 overflow-hidden border-t border-border/50">
       <div className="max-w-7xl mx-auto px-4 mb-6">
         <p className="text-center text-sm text-muted-foreground uppercase tracking-wider">
-          Brands We've Worked With
+          BRANDS OUR TEAM HAS WORKED WITH
         </p>
       </div>
 
