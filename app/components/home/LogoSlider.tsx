@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useAnimationControls } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 const companies = [
   { name: "Intel", slug: "intel" },
@@ -61,20 +61,7 @@ function LogoSet() {
 }
 
 export function LogoSlider() {
-  const controls = useAnimationControls();
   const [isHovered, setIsHovered] = useState(false);
-
-  useEffect(() => {
-    controls.start({
-      x: "-50%",
-      transition: {
-        duration: isHovered ? 90 : 30,
-        repeat: Infinity,
-        ease: "linear",
-        repeatType: "loop",
-      },
-    });
-  }, [isHovered, controls]);
 
   return (
     <div className="w-full py-12 overflow-hidden border-t border-border/50">
@@ -97,7 +84,15 @@ export function LogoSlider() {
         <motion.div
           className="flex gap-16"
           initial={{ x: 0 }}
-          animate={controls}
+          animate={{
+            x: "-50%",
+          }}
+          transition={{
+            duration: isHovered ? 90 : 30,
+            repeat: Infinity,
+            ease: "linear",
+            repeatType: "loop",
+          }}
           style={{
             width: "max-content",
           }}
