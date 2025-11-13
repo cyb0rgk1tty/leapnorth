@@ -178,10 +178,10 @@ export default function CaseStudiesPage() {
                               ) : (
                                 <span className="text-4xl font-bold text-primary">
                                   <NumberCounter
-                                    end={result.value}
-                                    prefix={'prefix' in result ? result.prefix : ""}
-                                    suffix={'suffix' in result ? result.suffix : ""}
-                                    decimals={'decimals' in result ? result.decimals : 0}
+                                    end={result.value as number}
+                                    prefix={'prefix' in result ? result.prefix as string : ""}
+                                    suffix={'suffix' in result ? result.suffix as string : ""}
+                                    decimals={'decimals' in result ? result.decimals as number : 0}
                                   />
                                 </span>
                               )}
@@ -228,10 +228,10 @@ export default function CaseStudiesPage() {
                                 ) : (
                                   <span className="text-4xl font-bold text-primary">
                                     <NumberCounter
-                                      end={result.value}
-                                      prefix={'prefix' in result ? result.prefix : ""}
-                                      suffix={'suffix' in result ? result.suffix : ""}
-                                      decimals={'decimals' in result ? result.decimals : 0}
+                                      end={result.value as number}
+                                      prefix={'prefix' in result ? result.prefix as string : ""}
+                                      suffix={'suffix' in result ? result.suffix as string : ""}
+                                      decimals={'decimals' in result ? result.decimals as number : 0}
                                     />
                                   </span>
                                 )}
