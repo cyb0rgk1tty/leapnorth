@@ -18,7 +18,7 @@ const caseStudies = [
     solution:
       "We led a comprehensive paid media transformation, consolidating campaigns from 12+ fragmented efforts to 6 strategically designed always-on campaigns. This included advanced audience segmentation to eliminate overlap, refined bid strategies optimized for efficiency, channel-specific performance frameworks, and real-time optimization protocols. The streamlined approach eliminated internal competition while maximizing reach and conversion efficiency across all biddable channels. Additionally, we doubled retention rate and drove a 20% YoY increase in client satisfaction through improved campaign performance and customer engagement.",
     results: [
-      { label: "Cost Per Acquisition Decrease", value: 200, suffix: "%" },
+      { label: "Cost Per Acquisition", value: 200, suffix: "%" },
       { label: "Campaign Efficiency", value: 50, suffix: "%" },
       { label: "Market Position", value: 3, prefix: "#", suffix: " → #2" },
       { label: "Q4 Performance", prefix: "#1 ", value: "Q4 performance", suffix: " within past decade" },
@@ -182,7 +182,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   {!result.label.includes("Position") && !result.label.includes("Performance") && (
                     result.label.includes("Time") ||
                     result.label.includes("Error") ||
-                    result.label.includes("Cycle") ? (
+                    result.label.includes("Cycle") ||
+                    result.label.includes("Cost Per Acquisition") ? (
                       <span className="text-sm text-muted-foreground">reduction</span>
                     ) : (
                       <span className="text-sm text-muted-foreground">increase</span>

@@ -19,7 +19,7 @@ export default function CaseStudiesPage() {
       challenge: "Facing high cost per acquisition across biddable channels with 12+ competing campaigns causing cannibalization and increased costs. Unable to meet Q4 acquisition benchmarks while stuck in #3 market position behind aggressive competitors.",
       solution: "Strategic campaign consolidation from 12+ campaigns to 6 streamlined always-on campaigns, eliminating internal competition. Comprehensive paid media optimization across all biddable channels with advanced audience segmentation and bid strategy refinement. Doubled retention rate and drove 20% YoY increase in client satisfaction.",
       results: [
-        { label: "Cost Per Acquisition Decrease", value: 200, suffix: "%" },
+        { label: "Cost Per Acquisition", value: 200, suffix: "%" },
         { label: "Campaign Efficiency", value: 50, suffix: "%" },
         { label: "Market Position", value: 3, prefix: "#", suffix: " → #2" },
         { label: "Q4 Performance", prefix: "#1 ", value: "Q4 performance", suffix: " within past decade" }
@@ -186,7 +186,9 @@ export default function CaseStudiesPage() {
                                 </span>
                               )}
                               {!result.label.includes("Position") && !result.label.includes("Performance") && (
-                                <span className="text-muted-foreground">increase</span>
+                                <span className="text-muted-foreground">
+                                  {result.label.includes("Cost Per Acquisition") ? "decrease" : "increase"}
+                                </span>
                               )}
                             </div>
                           </div>
@@ -234,7 +236,9 @@ export default function CaseStudiesPage() {
                                   </span>
                                 )}
                                 {!result.label.includes("Position") && !result.label.includes("Performance") && (
-                                  <span className="text-muted-foreground">increase</span>
+                                  <span className="text-muted-foreground">
+                                    {result.label.includes("Cost Per Acquisition") ? "decrease" : "increase"}
+                                  </span>
                                 )}
                               </div>
                             </div>
