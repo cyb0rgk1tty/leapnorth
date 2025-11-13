@@ -52,7 +52,7 @@ export default function Home() {
                 className="flex flex-col sm:flex-row gap-4 justify-center"
               >
                 <Button size="lg" asChild className="text-lg px-8 py-6">
-                  <Link href="/contact">Get Started</Link>
+                  <Link href="/contact">Let's Talk</Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild className="text-lg px-8 py-6">
                   <Link href="/services">Learn More</Link>

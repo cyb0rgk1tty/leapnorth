@@ -73,7 +73,7 @@ export function Header() {
             </NavigationMenu>
 
             <Button asChild className="ml-4">
-              <Link href="/contact">Get Started</Link>
+              <Link href="/contact">Let's Talk</Link>
             </Button>
           </nav>
 
@@ -144,7 +144,7 @@ export function Header() {
               </Link>
               <Button asChild className="w-full">
                 <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                  Get Started
+                  Let's Talk
                 </Link>
               </Button>
             </nav>
