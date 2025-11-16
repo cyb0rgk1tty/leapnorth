@@ -1,0 +1,433 @@
+---
+title: "The GA4 Migration Survival Guide: What Canadian Marketers Need to Know Before July 1st"
+description: "Don't lose your analytics data! Complete guide to migrating from Universal Analytics to GA4 before the July 1, 2023 deadline."
+date: "2023-05-15"
+author: "Leap North Team"
+category: "Analytics"
+tags: ["Google Analytics 4", "GA4", "analytics", "migration", "data tracking", "marketing analytics"]
+image: "/images/blog/ga4-migration.png"
+published: true
+---
+
+Time is running out. On July 1, 2023, Google will stop processing data in Universal Analytics (UA), and if you haven't migrated to Google Analytics 4 (GA4), you risk losing critical insights into your marketing performance. For Canadian marketers, this deadline coincides with Canada Day, meaning many teams will be away during this critical transition period.
+
+This isn't a simple upgrade - GA4 represents a fundamental shift in how Google tracks and reports website data. The good news? If you start now, you have enough time to migrate properly and avoid the panic that's gripping procrastinating marketers.
+
+## Why This Migration Matters
+
+Universal Analytics has been the industry standard for over a decade. GA4's forced migration affects millions of websites globally, and the consequences of ignoring it are severe:
+
+- **Data processing stops July 1st** - No new data will be collected in Universal Analytics
+- **Historical data isn't transferred** - GA4 doesn't import your UA history
+- **Access ends after 6 months** - You'll have limited time to export historical reports
+- **No backwards compatibility** - You can't run UA and GA4 with the same tracking approach
+
+According to recent industry surveys, over 60% of marketers haven't completed their GA4 migration, despite the looming deadline. Don't be part of that statistic.
+
+## Understanding the Fundamental Differences
+
+Before diving into migration, you need to understand that GA4 isn't just "UA with a new interface" - it's a completely different analytics philosophy.
+
+### Session-Based vs. Event-Based Tracking
+
+**Universal Analytics (Session-Based):**
+- Organizes data around sessions (visits)
+- Pageviews are the primary metric
+- Rigid, predefined hit types (pageview, event, transaction)
+- User behavior understood through session duration and pages per session
+
+**Google Analytics 4 (Event-Based):**
+- Everything is an event
+- No concept of "hits" - all interactions are events with parameters
+- Flexible - you define what events matter for your business
+- User behavior understood through event sequences and engagement metrics
+
+This shift from "How many people visited?" to "What did people do?" represents a more sophisticated approach to analytics, but it requires rethinking your reporting strategy.
+
+### Key Metric Changes
+
+Several familiar metrics work differently or don't exist in GA4:
+
+**Metrics that changed:**
+- **Bounce Rate → Engagement Rate** - GA4 measures engaged sessions (10+ seconds, conversion, or 2+ page views) rather than bounces
+- **Sessions** - Calculated differently, not directly comparable to UA
+- **Goals** - Now called "Conversions" and set up through events
+
+**Metrics that are gone:**
+- Average session duration
+- Pages per session
+- % New Sessions
+
+**New metrics to learn:**
+- Engaged sessions
+- Engagement time
+- User engagement
+- Event count
+
+## The GA4 Migration Timeline
+
+With 6 weeks until the deadline, here's your realistic timeline:
+
+### Week 1-2: Setup and Configuration (NOW)
+
+**Priority actions:**
+1. Create your GA4 property (keep UA running)
+2. Install GA4 tracking code alongside UA code
+3. Enable Google Signals for cross-device tracking
+4. Link GA4 to Google Ads and Search Console
+5. Configure basic data streams
+
+**Why dual tracking matters:**
+GA4 has no historical data import. The only way to build year-over-year comparisons is to run both platforms simultaneously. Even if GA4 confuses you initially, having 6+ weeks of data before UA shuts down is invaluable.
+
+### Week 3-4: Event and Conversion Setup
+
+**Key tasks:**
+1. Identify your most important UA goals
+2. Recreate them as GA4 conversions (events)
+3. Set up enhanced measurement (automatic event tracking)
+4. Configure custom events for business-specific actions
+5. Test event firing with DebugView
+
+**Critical events to configure:**
+- Form submissions (contact, newsletter, download)
+- Button clicks (CTA buttons, phone numbers, external links)
+- Video engagement
+- Scroll depth
+- File downloads
+- Outbound link clicks
+- E-commerce transactions (if applicable)
+
+### Week 5: Reports and Audiences
+
+**Focus areas:**
+1. Customize your GA4 reports and dashboards
+2. Create audiences for remarketing
+3. Set up BigQuery export (if needed for advanced analysis)
+4. Configure user properties for segmentation
+5. Build custom reports mirroring your UA favorites
+
+### Week 6: Testing and Team Training
+
+**Final preparations:**
+1. Verify all conversions are tracking correctly
+2. Compare GA4 and UA data for discrepancies
+3. Train team members on GA4 interface
+4. Document your setup for future reference
+5. Export critical UA reports before July 1st
+
+## Step-by-Step Migration Checklist
+
+### Step 1: Create Your GA4 Property
+
+Don't delete your Universal Analytics property - you'll create a new GA4 property alongside it.
+
+**How to create GA4:**
+1. Log into Google Analytics
+2. Click Admin (gear icon, bottom left)
+3. In the Property column, click "Create Property"
+4. Select "Google Analytics 4"
+5. Follow the setup wizard
+6. **Or** use the GA4 Setup Assistant in your existing UA property
+
+**Pro tip:** GA4 Setup Assistant is the easiest path - it creates the GA4 property and helps you configure basic settings automatically.
+
+### Step 2: Install GA4 Tracking Code
+
+You need to add GA4 tracking while keeping UA tracking active.
+
+**Three installation methods:**
+
+**Option 1: Google Tag Manager (Recommended)**
+- Add new GA4 Configuration tag
+- Use your GA4 Measurement ID (starts with "G-")
+- Deploy changes
+- Keep existing UA tag active
+
+**Option 2: Global Site Tag (gtag.js)**
+```html
+<!-- Add this alongside your existing UA code -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+```
+
+**Option 3: Platform-Specific Plugins**
+- WordPress: Use official "Site Kit by Google" plugin
+- Shopify: Add via theme settings
+- Wix/Squarespace: Use built-in Google Analytics integration
+
+**Verification:**
+1. Visit your website
+2. Open GA4 property
+3. Go to Reports → Realtime
+4. Confirm you see your visit appear within 30 seconds
+
+### Step 3: Enable Enhanced Measurement
+
+GA4 can automatically track common events without custom code.
+
+**How to enable:**
+1. Go to Admin → Data Streams
+2. Click your web data stream
+3. Toggle "Enhanced measurement" to ON
+4. Configure which events to track automatically:
+   - Page views ✓
+   - Scrolls ✓
+   - Outbound clicks ✓
+   - Site search ✓
+   - Video engagement ✓
+   - File downloads ✓
+
+Enhanced measurement handles 80% of what most businesses need to track without any coding.
+
+### Step 4: Set Up Conversions
+
+Conversions are GA4's equivalent of goals, but they work differently.
+
+**Creating a conversion:**
+1. Go to Admin → Events
+2. Click "Create event" (or mark existing event as conversion)
+3. Configure event parameters
+4. Save and mark as "conversion"
+
+**Common conversions to set up:**
+
+**Lead generation:**
+- Form submission (contact_form_submit)
+- PDF download (file_download)
+- Email signup (email_signup)
+
+**E-commerce:**
+- Purchase (purchase)
+- Add to cart (add_to_cart)
+- Begin checkout (begin_checkout)
+
+**Engagement:**
+- Video complete (video_complete)
+- CTA button click (cta_click)
+- Phone call click (call_click)
+
+### Step 5: Link Google Ads and Search Console
+
+**Google Ads linking:**
+1. Admin → Property → Google Ads Links
+2. Click "Link"
+3. Select your Google Ads account
+4. Enable auto-tagging
+5. Confirm linking
+
+**Search Console linking:**
+1. Admin → Property → Search Console Links
+2. Click "Link"
+3. Choose your Search Console property
+4. Associate with your web data stream
+
+These integrations are critical for understanding acquisition performance and SEO impact.
+
+### Step 6: Configure Reporting
+
+GA4's default reports may not match what you need.
+
+**Customizing reports:**
+1. Navigate to Reports → Library
+2. Click "Customize report" on any standard report
+3. Add/remove dimensions and metrics
+4. Create custom comparisons
+5. Save changes
+
+**Building custom explorations:**
+1. Go to Explore (left sidebar)
+2. Choose template (Free form, Funnel, Path exploration)
+3. Add dimensions, metrics, and segments
+4. Save as custom report
+
+**Recommended custom reports:**
+- Traffic source performance
+- Landing page analysis
+- Conversion funnel visualization
+- Campaign performance comparison
+- User demographics and behavior
+
+## Common Migration Pitfalls (And How to Avoid Them)
+
+### Pitfall 1: Waiting Until the Last Minute
+
+**The problem:** GA4 has a learning curve. Rushing through setup leads to misconfigured tracking and lost data.
+
+**The solution:** Migrate NOW, even if imperfectly. You can refine later, but you can't recreate lost time for data collection.
+
+### Pitfall 2: Expecting Identical Data
+
+**The problem:** Marketers panic when GA4 and UA show different numbers.
+
+**The solution:** They WILL differ. GA4 uses different calculation methods, especially for sessions and engagement. This is expected. Focus on trends rather than absolute numbers.
+
+### Pitfall 3: Not Exporting Historical UA Data
+
+**The problem:** After 6 months, access to UA historical data will end.
+
+**The solution:** Export critical reports before July 1st:
+- Year-over-year comparison reports
+- Top landing pages and traffic sources
+- Conversion performance by channel
+- Audience demographic reports
+
+Save as CSV or connect to Google Sheets for long-term storage.
+
+### Pitfall 4: Forgetting Mobile App Tracking
+
+**The problem:** If you have a mobile app tracked in UA, it needs separate GA4 configuration.
+
+**The solution:** Set up GA4 for Firebase to track mobile app data. This requires SDK implementation, so involve your development team early.
+
+### Pitfall 5: Ignoring Data Retention Settings
+
+**The problem:** GA4's default data retention is only 2 months for user-level data.
+
+**The solution:** Go to Admin → Data Settings → Data Retention and change to 14 months (maximum for standard properties).
+
+## What Happens to Your UA Data After July 1st?
+
+Here's the timeline:
+
+**July 1, 2023:** Universal Analytics stops processing new data
+- Existing data remains accessible
+- No new hits are recorded
+- Reports become static
+
+**December 2023 (estimated):** Historical UA data becomes read-only with limited access
+- You can still view reports
+- Export functionality may be restricted
+- Data will eventually be deleted
+
+**Mid-2024:** Google will delete Universal Analytics data
+- Exact date TBD
+- Export everything important before this happens
+
+**Action item:** Schedule time in June 2023 to export all critical UA data and reports.
+
+## Canadian-Specific Considerations
+
+### Canada Day Timing Challenge
+
+July 1st isn't just the migration deadline - it's Canada Day. Many marketing teams will be away enjoying the long weekend.
+
+**Mitigation strategy:**
+- Complete migration by June 25th
+- Test everything thoroughly before the holiday
+- Assign a backup team member to monitor analytics July 1-3
+- Don't plan any major campaigns for early July until you confirm GA4 is working
+
+### Privacy and Consent Requirements
+
+Canadian privacy laws (PIPEDA) apply to GA4 data collection.
+
+**Compliance checklist:**
+- Update privacy policy to mention GA4 data collection
+- Configure Google Consent Mode if using cookie consent banners
+- Disable Google Signals if you don't have proper consent mechanisms
+- Consider IP anonymization for user privacy
+
+### Multi-Language Tracking
+
+For bilingual websites (English/French), ensure GA4 properly tracks language preference:
+- Set up language as a custom dimension
+- Create separate audiences for English/French users
+- Configure site search to handle both languages
+
+## Tools and Resources for Migration
+
+**Google's Official Resources:**
+- [GA4 Setup Assistant](https://support.google.com/analytics/answer/9744165) - Built into UA interface
+- [GA4 Demo Account](https://support.google.com/analytics/answer/6367342) - Practice with real data
+- [Google Analytics Academy](https://analytics.google.com/analytics/academy/) - Free certification courses
+
+**Third-Party Tools:**
+- [GA4 Migration Checklist by Loves Data](https://www.lovesdata.com/ga4) - Comprehensive tracking
+- [Analytics Mania GA4 Resources](https://www.analyticsmania.com/google-analytics-4/) - Technical tutorials
+- [Measureschool YouTube Channel](https://www.youtube.com/c/Measureschool) - Video walkthroughs
+
+**Browser Extensions:**
+- Google Analytics Debugger - Troubleshoot tracking issues
+- Tag Assistant - Verify Google tags are firing
+
+## After Migration: Optimizing GA4
+
+Once you've completed the basic migration, focus on advanced features:
+
+### 1. Custom Dimensions and Metrics
+
+Track business-specific data:
+- Customer type (new vs. returning)
+- Product category
+- User membership level
+- Content author
+
+### 2. Predictive Metrics
+
+GA4 offers AI-powered predictions:
+- Purchase probability
+- Churn probability
+- Revenue prediction
+
+Enable these in Admin → Data Display → Predictive Metrics.
+
+### 3. BigQuery Integration
+
+For advanced analysis, connect GA4 to BigQuery:
+- Free for up to 1 million events per day
+- Enables custom SQL queries
+- Unlimited data retention
+- Integration with data visualization tools
+
+### 4. Debug Mode
+
+Use GA4's DebugView for real-time troubleshooting:
+- See events as they fire
+- Verify parameters and values
+- Test before deploying to production
+
+## Conclusion: Your Action Plan for This Week
+
+If you're reading this and haven't started your GA4 migration, here's what to do RIGHT NOW:
+
+**Today (1 hour):**
+1. Log into Google Analytics
+2. Use GA4 Setup Assistant to create your GA4 property
+3. Install GA4 tracking code (preferably via Google Tag Manager)
+4. Verify data is flowing into GA4
+
+**This Week (3-4 hours):**
+1. Enable Enhanced Measurement
+2. Recreate your top 5 UA goals as GA4 conversions
+3. Link Google Ads and Search Console
+4. Customize your first GA4 report
+
+**Next Week (2-3 hours):**
+1. Set data retention to 14 months
+2. Create basic audiences for remarketing
+3. Train your team on GA4 interface
+4. Test all conversions
+
+**Before July 1st:**
+1. Export critical UA reports
+2. Document your GA4 setup
+3. Run UA and GA4 side-by-side for comparison
+4. Celebrate avoiding the last-minute panic
+
+GA4 migration isn't optional - it's happening whether you're ready or not. The marketers who act now will have clean data, working conversions, and confidence in their analytics. Those who wait will scramble to make sense of a new platform with zero historical context.
+
+Which marketer will you be?
+
+---
+
+**Need help with your GA4 migration?** Leap North specializes in analytics setup and marketing measurement. We can handle your entire migration, configure custom tracking, and train your team on GA4. [Schedule a free consultation](/contact) before it's too late.
+
+---
+
+**About the Author**: The Leap North team has successfully migrated over 50 client properties to GA4, ensuring no data loss and optimal configuration for Canadian businesses of all sizes.

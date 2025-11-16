@@ -88,11 +88,6 @@ export function Footer() {
                   hello@leapnorth.co
                 </a>
               </li>
-              <li>
-                <a href="tel:+1234567890" className="hover:text-primary transition-colors">
-                  +1 (234) 567-890
-                </a>
-              </li>
             </ul>
             <div className="flex space-x-4 mt-4">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="LinkedIn">
