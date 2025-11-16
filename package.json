@@ -39,6 +39,7 @@
     "next": "^15.5.6",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.4.6",
+    "nodemailer": "^7.0.10",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-hook-form": "^7.66.0",
@@ -57,6 +58,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.17",
+    "@types/nodemailer": "^7.0.3",
     "autoprefixer": "^10.4.22",
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.1",
