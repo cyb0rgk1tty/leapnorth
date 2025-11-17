@@ -29,19 +29,19 @@ export default function CaseStudiesPage() {
       author: ""
     },
     {
-      slug: "growthco-retail-automation",
-      client: "GrowthCo Retail",
-      industry: "E-commerce",
-      challenge: "Manual order processing causing delays and errors",
-      solution: "Custom automation workflow connecting Shopify, inventory management, and shipping",
+      slug: "business-cost-savings-cicd-automation",
+      client: "Business Cost Savings Consultant",
+      industry: "Business Consulting",
+      challenge: "Client required secure, efficient code deployment while maintaining complete data privacy and eliminating time-consuming manual compilation and deployment processes",
+      solution: "Implemented self-hosted Git repository with automated CI/CD pipeline, ensuring all client information remains private on their own infrastructure while automating the entire build and deployment workflow",
       results: [
-        { label: "Processing Time", value: 85, suffix: "%" },
-        { label: "Order Errors", value: 94, suffix: "%" },
-        { label: "Cost Savings", value: 40, prefix: "$", suffix: "K/yr" }
+        { label: "Deployment Time", value: 70, suffix: "% reduction" },
+        { label: "Manual Errors", value: 100, suffix: "% eliminated" },
+        { label: "Development Velocity", value: 3, suffix: "x faster" }
       ],
-      services: ["Workflow Automation", "API Integration"],
-      testimonial: "The automation system has been a game-changer. We're processing 3x more orders with the same team.",
-      author: "Michael Torres, Operations Director"
+      services: ["DevOps Automation", "CI/CD Implementation", "Infrastructure Security"],
+      testimonial: "The self-hosted CI/CD pipeline transformed our development process. We now deploy in minutes instead of hours, with complete confidence in data privacy.",
+      author: "Operations Lead"
     },
     {
       slug: "fintech-innovations-ai-chatbot",
