@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useScrollReveal } from "@/app/lib/animations/hooks";
 import { fadeInUp } from "@/app/lib/animations/variants";
-import { ReactNode, CSSProperties } from "react";
+import { ReactNode, CSSProperties, useState, useEffect } from "react";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -19,7 +19,15 @@ interface AnimatedSectionProps {
  */
 export function AnimatedSection({ children, className = "", delay = 0, id, style }: AnimatedSectionProps) {
   const { ref, isInView } = useScrollReveal();
-  const shouldReduceMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Only check reduced motion after mount to avoid hydration mismatch
+  const shouldReduceMotion = isMounted && prefersReducedMotion;
 
   if (shouldReduceMotion) {
     return <section ref={ref} className={className} id={id} style={style}>{children}</section>;

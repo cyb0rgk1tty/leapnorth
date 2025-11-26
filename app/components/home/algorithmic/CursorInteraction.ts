@@ -49,26 +49,25 @@ export class CursorInteraction {
    * Attach event listeners
    */
   private attachListeners(): void {
+    // Always attach mouse events when using document listener
+    // (handles hybrid devices like touchscreen laptops)
+    if (this.useDocumentListener) {
+      // Listen on document for full coverage (works even when cursor over content)
+      document.addEventListener('mousemove', this.boundHandleMouseMove);
+      // Note: mouseenter/mouseleave not needed - bounds checking done in handleMouseMove
+    } else if (!this.isTouchDevice) {
+      // Listen on container only for non-touch devices
+      this.container.addEventListener('mousemove', this.boundHandleMouseMove);
+      this.container.addEventListener('mouseenter', this.boundHandleMouseEnter);
+      this.container.addEventListener('mouseleave', this.boundHandleMouseLeave);
+    }
+
+    // Also attach touch events for touch-capable devices
     if (this.isTouchDevice) {
-      // Touch events for mobile - always on container for touch
       this.container.addEventListener('touchstart', this.boundHandleTouchStart, { passive: true });
       this.container.addEventListener('touchmove', this.boundHandleTouchMove, { passive: true });
       this.container.addEventListener('touchend', this.boundHandleTouchEnd);
       this.container.addEventListener('touchcancel', this.boundHandleTouchEnd);
-    } else {
-      // Mouse events for desktop
-      if (this.useDocumentListener) {
-        // Listen on document for full coverage (works even when cursor over content)
-        document.addEventListener('mousemove', this.boundHandleMouseMove);
-        // Still need enter/leave on container to know when in bounds
-        this.container.addEventListener('mouseenter', this.boundHandleMouseEnter);
-        this.container.addEventListener('mouseleave', this.boundHandleMouseLeave);
-      } else {
-        // Listen on container only
-        this.container.addEventListener('mousemove', this.boundHandleMouseMove);
-        this.container.addEventListener('mouseenter', this.boundHandleMouseEnter);
-        this.container.addEventListener('mouseleave', this.boundHandleMouseLeave);
-      }
     }
   }
 
@@ -76,23 +75,21 @@ export class CursorInteraction {
    * Remove event listeners
    */
   public detachListeners(): void {
+    // Remove mouse listeners
+    if (this.useDocumentListener) {
+      document.removeEventListener('mousemove', this.boundHandleMouseMove);
+    } else if (!this.isTouchDevice) {
+      this.container.removeEventListener('mousemove', this.boundHandleMouseMove);
+      this.container.removeEventListener('mouseenter', this.boundHandleMouseEnter);
+      this.container.removeEventListener('mouseleave', this.boundHandleMouseLeave);
+    }
+
+    // Remove touch listeners
     if (this.isTouchDevice) {
       this.container.removeEventListener('touchstart', this.boundHandleTouchStart);
       this.container.removeEventListener('touchmove', this.boundHandleTouchMove);
       this.container.removeEventListener('touchend', this.boundHandleTouchEnd);
       this.container.removeEventListener('touchcancel', this.boundHandleTouchEnd);
-    } else {
-      if (this.useDocumentListener) {
-        // Remove from document
-        document.removeEventListener('mousemove', this.boundHandleMouseMove);
-        this.container.removeEventListener('mouseenter', this.boundHandleMouseEnter);
-        this.container.removeEventListener('mouseleave', this.boundHandleMouseLeave);
-      } else {
-        // Remove from container
-        this.container.removeEventListener('mousemove', this.boundHandleMouseMove);
-        this.container.removeEventListener('mouseenter', this.boundHandleMouseEnter);
-        this.container.removeEventListener('mouseleave', this.boundHandleMouseLeave);
-      }
     }
   }
 

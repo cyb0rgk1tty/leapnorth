@@ -13,18 +13,18 @@ import Link from "next/link";
 export default function CaseStudiesPage() {
   const caseStudies = [
     {
-      slug: "major-telecom-cpa-optimization",
+      slug: "major-telecom-transformation",
       client: "Major Telecommunications Company",
       industry: "Telecommunications",
-      challenge: "Facing high cost per acquisition across biddable channels with 12+ competing campaigns causing cannibalization and increased costs. Unable to meet Q4 acquisition benchmarks while stuck in #3 market position behind aggressive competitors.",
-      solution: "Strategic campaign consolidation from 12+ campaigns to 6 streamlined always-on campaigns, eliminating internal competition. Comprehensive paid media optimization across all biddable channels with advanced audience segmentation and bid strategy refinement. Doubled retention rate and drove 20% YoY increase in client satisfaction.",
+      challenge: "Facing high cost per acquisition across biddable channels with 12+ competing campaigns causing cannibalization and increased costs across Business, Mobility, Health, Regional, and Smart Home Security divisions. Unable to meet Q4 acquisition benchmarks while stuck in #3 market position behind aggressive competitors.",
+      solution: "Strategic campaign consolidation from 12+ campaigns to 6 streamlined always-on campaigns, eliminating internal competition. Developed tailored strategies for each business unit while implementing comprehensive paid media optimization with advanced audience segmentation and bid strategy refinement. Led account restructuring initiatives and actively optimized paid search accounts across all channels.",
       results: [
-        { label: "Cost Per Acquisition", value: 200, suffix: "%" },
-        { label: "Campaign Efficiency", value: 50, suffix: "%" },
-        { label: "Market Position", value: 3, prefix: "#", suffix: " → #2" },
-        { label: "Q4 Performance", prefix: "#1 ", value: "Q4 performance", suffix: " within past decade" }
+        { label: "Cost Per Acquisition", value: 30, suffix: "%" },
+        { label: "Cost Per Click", value: 20, suffix: "%" },
+        { label: "Conversions", value: 25, suffix: "%" },
+        { label: "Market Position", value: 3, prefix: "#", suffix: " → #2" }
       ],
-      services: ["Paid Media Optimization", "Performance Marketing"],
+      services: ["Paid Media Optimization", "Performance Marketing", "Account Management", "Digital Strategy"],
       testimonial: "",
       author: ""
     },
@@ -42,6 +42,22 @@ export default function CaseStudiesPage() {
       services: ["DevOps Automation", "CI/CD Implementation", "Infrastructure Security"],
       testimonial: "The self-hosted CI/CD pipeline transformed our development process. We now deploy in minutes instead of hours, with complete confidence in data privacy.",
       author: "Operations Lead"
+    },
+    {
+      slug: "campus-dental-clinic-business-transformation",
+      client: "Campus Dental Clinic",
+      industry: "Healthcare",
+      challenge: "Struggling to attract new patients with poor online reputation and negative reviews. Faced high appointment cancellations, inconsistent schedules, and difficulty finding and retaining qualified staff. Limited clinic hours were restricting revenue potential and growth opportunities.",
+      solution: "Business consultant conducted comprehensive operational audit and implemented process improvements across all areas. Launched aggressive reputation management campaign to improve Google Reviews and online presence. Created targeted social media marketing strategy to attract local patients. Developed robust HR recruiting strategy with improved staff onboarding and retention programs. Optimized scheduling system and expanded clinic hours to maximize capacity.",
+      results: [
+        { label: "Revenue Growth", value: 70, suffix: "%" },
+        { label: "Google Reviews", value: 400, suffix: "%" },
+        { label: "Staff Retention", value: 100, suffix: "%" },
+        { label: "Appointment Fill Rate", value: 85, suffix: "%" }
+      ],
+      services: ["Business Consulting", "Reputation Management", "Social Media Marketing", "HR/Recruiting Strategy"],
+      testimonial: "",
+      author: ""
     },
     {
       slug: "fintech-innovations-ai-chatbot",
@@ -72,6 +88,53 @@ export default function CaseStudiesPage() {
       services: ["Local SEO", "Paid Advertising", "Reputation Management"],
       testimonial: "We went from invisible to dominating our local market. Our phone won't stop ringing!",
       author: "David Miller, Owner"
+    },
+    {
+      slug: "pharma-multi-brand-campaign-management",
+      client: "Global Pharmaceutical Company",
+      industry: "Pharmaceutical & Healthcare",
+      challenge: "Managing complex, highly regulated advertising campaigns across multiple therapeutic areas with strict compliance requirements, large monthly budgets exceeding $1.5M, and the need to hit spending targets while maintaining full regulatory adherence.",
+      solution: "Expert management of substantial monthly ad spend across multiple pharmaceutical brands. Collaborated with media planners to establish and consistently hit monthly and quarterly budgets. Conducted thorough research into pharmaceutical advertising regulations and applied them to campaigns, ensuring full compliance and mitigating risks.",
+      results: [
+        { label: "Monthly Ad Spend", value: 1.5, prefix: "$", suffix: "M+" },
+        { label: "Budget Targets", value: 100, suffix: "%" },
+        { label: "Onsite Conversions", value: 20, suffix: "% MoM" }
+      ],
+      services: ["Paid Media Management", "Regulatory Compliance", "Budget Planning", "Healthcare Marketing"],
+      testimonial: "",
+      author: ""
+    },
+    {
+      slug: "american-automaker-digital-innovation",
+      client: "Major American Automaker",
+      industry: "Automotive",
+      challenge: "High customer acquisition costs through traditional retail channels at $100 per app download. Needed innovative digital advertising approaches and new performance metrics to compete in the evolving automotive digital landscape.",
+      solution: "Pioneered new ad formats in collaboration with Google, including app download campaigns achieving 85% cost reduction and dealer visit tracking on Google Maps. Applied best practices across the largest account portfolio, earning industry recognition for excellence.",
+      results: [
+        { label: "App Download Cost", value: 85, suffix: "%" },
+        { label: "Cost Per Click", value: 20, suffix: "%" },
+        { label: "Cost Per Acquisition", value: 15, suffix: "%" },
+        { label: "Recognition", value: "Google Best Practices Award" }
+      ],
+      services: ["Paid Advertising", "App Marketing", "Innovation Strategy", "Performance Marketing"],
+      testimonial: "",
+      author: ""
+    },
+    {
+      slug: "multi-industry-ux-optimization",
+      client: "Multiple Clients",
+      industry: "Multi-Industry",
+      challenge: "Various businesses struggling with poor conversion rates, high bounce rates, low foot traffic, and suboptimal mobile experiences that were directly impacting revenue and growth potential.",
+      solution: "Conducted comprehensive UX research and implemented strategic website optimizations across multiple clients. Delivered mobile-first design improvements, enhanced search engine rankings, and drove business development initiatives through compelling presentations and pitches.",
+      results: [
+        { label: "Conversion Rate", value: 120, suffix: "%" },
+        { label: "Bounce Rate", value: 50, suffix: "%" },
+        { label: "Online Orders", value: 500, suffix: "%" },
+        { label: "Additional Sales", value: 60, prefix: "$", suffix: "K" }
+      ],
+      services: ["UX Design", "Conversion Optimization", "Business Development", "Mobile Optimization", "SEO"],
+      testimonial: "",
+      author: ""
     }
   ];
 
@@ -166,14 +229,14 @@ export default function CaseStudiesPage() {
                             <div className="flex items-baseline gap-2 flex-wrap">
                               {typeof result.value === 'string' && result.label.includes("Performance") ? (
                                 <>
-                                  <span className="text-4xl font-bold text-primary">{result.prefix}</span>
-                                  <span className="text-muted-foreground">{result.value}{result.suffix}</span>
+                                  <span className="text-4xl font-bold text-primary">{'prefix' in result && result.prefix}</span>
+                                  <span className="text-muted-foreground">{result.value}{'suffix' in result && result.suffix}</span>
                                 </>
                               ) : typeof result.value === 'string' ? (
                                 <span className="text-4xl font-bold text-primary">
-                                  {result.prefix}
+                                  {'prefix' in result && result.prefix}
                                   {result.value}
-                                  {result.suffix}
+                                  {'suffix' in result && result.suffix}
                                 </span>
                               ) : (
                                 <span className="text-4xl font-bold text-primary">
@@ -185,9 +248,9 @@ export default function CaseStudiesPage() {
                                   />
                                 </span>
                               )}
-                              {!result.label.includes("Position") && !result.label.includes("Performance") && (
+                              {!result.label.includes("Position") && !result.label.includes("Performance") && !result.label.includes("Recognition") && (
                                 <span className="text-muted-foreground">
-                                  {result.label.includes("Cost Per Acquisition") ? "decrease" : "increase"}
+                                  {result.label.includes("Cost") || result.label.includes("Bounce") ? "decrease" : "increase"}
                                 </span>
                               )}
                             </div>
@@ -216,14 +279,14 @@ export default function CaseStudiesPage() {
                               <div className="flex items-baseline gap-2 flex-wrap">
                                 {typeof result.value === 'string' && result.label.includes("Performance") ? (
                                   <>
-                                    <span className="text-4xl font-bold text-primary">{result.prefix}</span>
-                                    <span className="text-muted-foreground">{result.value}{result.suffix}</span>
+                                    <span className="text-4xl font-bold text-primary">{'prefix' in result && result.prefix}</span>
+                                    <span className="text-muted-foreground">{result.value}{'suffix' in result && result.suffix}</span>
                                   </>
                                 ) : typeof result.value === 'string' ? (
                                   <span className="text-4xl font-bold text-primary">
-                                    {result.prefix}
+                                    {'prefix' in result && result.prefix}
                                     {result.value}
-                                    {result.suffix}
+                                    {'suffix' in result && result.suffix}
                                   </span>
                                 ) : (
                                   <span className="text-4xl font-bold text-primary">
@@ -235,9 +298,9 @@ export default function CaseStudiesPage() {
                                     />
                                   </span>
                                 )}
-                                {!result.label.includes("Position") && !result.label.includes("Performance") && (
+                                {!result.label.includes("Position") && !result.label.includes("Performance") && !result.label.includes("Recognition") && (
                                   <span className="text-muted-foreground">
-                                    {result.label.includes("Cost Per Acquisition") ? "decrease" : "increase"}
+                                    {result.label.includes("Cost") || result.label.includes("Bounce") ? "decrease" : "increase"}
                                   </span>
                                 )}
                               </div>

@@ -31,7 +31,9 @@ export function AlgorithmicBackground() {
   }, []);
 
   // Check if we should disable the effect
-  const shouldDisable = prefersReducedMotion || isLowEnd;
+  // Note: Disabled prefersReducedMotion check - animation will always run
+  // Users who need reduced motion should use browser's native reduced motion support
+  const shouldDisable = isLowEnd;
 
   /**
    * Set up particle system (immediately, no load delay)
@@ -69,10 +71,8 @@ export function AlgorithmicBackground() {
     particleSystemRef.current = new ParticleSystem(canvas, config);
     particleSystemRef.current.resize(rect.width, rect.height);
 
-    // Create cursor interaction handler (listen on event overlay for full coverage)
-    if (eventOverlayRef.current) {
-      cursorInteractionRef.current = new CursorInteraction(eventOverlayRef.current, particleSystemRef.current, canvas);
-    }
+    // Create cursor interaction handler (use canvas for accurate bounds matching particle system)
+    cursorInteractionRef.current = new CursorInteraction(canvas, particleSystemRef.current, canvas);
 
     // Animation loop
     let lastFrameTime = 0;
@@ -106,9 +106,9 @@ export function AlgorithmicBackground() {
       if (cursorInteractionRef.current) {
         cursorInteractionRef.current.detachListeners();
       }
-      if (eventOverlayRef.current && particleSystemRef.current) {
+      if (particleSystemRef.current) {
         cursorInteractionRef.current = new CursorInteraction(
-          eventOverlayRef.current,
+          canvas,
           particleSystemRef.current,
           canvas
         );
@@ -157,16 +157,8 @@ export function AlgorithmicBackground() {
     };
   }, [shouldDisable]);
 
-  // Fallback for reduced motion or low-end devices
-  if (shouldDisable) {
-    return (
-      <div
-        className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/10 via-background to-background"
-        aria-hidden="true"
-      />
-    );
-  }
-
+  // Always render the same structure to avoid hydration mismatch
+  // The canvas just won't have particles if shouldDisable is true (handled in useEffect)
   return (
     <div ref={containerRef} className="absolute inset-0" style={{ zIndex: 0 }}>
       {/* Canvas layer (background) */}

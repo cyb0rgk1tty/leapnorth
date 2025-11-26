@@ -55,10 +55,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Case study pages
   const caseStudies = [
-    "major-telecom-cpa-optimization",
-    "growthco-retail-automation",
+    "major-telecom-transformation",
+    "business-cost-savings-cicd-automation",
+    "campus-dental-clinic-business-transformation",
     "fintech-innovations-ai-chatbot",
     "localservice-pro-local-seo",
+    "pharma-multi-brand-campaign-management",
+    "american-automaker-digital-innovation",
+    "multi-industry-ux-optimization",
   ];
 
   const caseStudyPages: MetadataRoute.Sitemap = caseStudies.map((slug) => ({
