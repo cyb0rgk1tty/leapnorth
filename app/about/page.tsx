@@ -204,10 +204,10 @@ export default function AboutPage() {
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
             {team.map((member, index) => (
-              <motion.div key={index} variants={staggerItem}>
-                <AnimatedCard>
-                  <Card className="text-center border-border bg-accent hover:border-primary transition-colors duration-300">
-                    <CardContent className="pt-6">
+              <motion.div key={index} variants={staggerItem} className="h-full">
+                <AnimatedCard className="h-full">
+                  <Card className="h-full text-center border-border bg-accent hover:border-primary transition-colors duration-300">
+                    <CardContent className="h-full pt-6 flex flex-col">
                       <Avatar className="w-24 h-24 mx-auto mb-4 bg-primary/10 text-primary">
                         <AvatarFallback className="text-2xl font-bold">
                           {member.initials}
@@ -215,7 +215,7 @@ export default function AboutPage() {
                       </Avatar>
                       <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                       <p className="text-primary mb-4">{member.role}</p>
-                      <p className="text-sm text-muted-foreground">{member.bio}</p>
+                      <p className="text-sm text-muted-foreground flex-grow">{member.bio}</p>
                     </CardContent>
                   </Card>
                 </AnimatedCard>

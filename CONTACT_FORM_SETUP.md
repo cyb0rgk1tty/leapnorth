@@ -26,7 +26,7 @@ Add these variables to `/var/www/leapnorth/.env.local`:
 # SMTP Server Settings
 SMTP_HOST=your.smtp.server.com
 SMTP_PORT=587                    # 587 for TLS, 465 for SSL, 25 for unsecured
-SMTP_USER=your-email@domain.com
+=your-email@domain.com
 SMTP_PASS=your-smtp-password
 
 # Email Settings
