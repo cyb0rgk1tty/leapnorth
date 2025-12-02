@@ -1,9 +1,8 @@
 "use client";
 
 import { Button } from "@/app/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/app/components/ui/card";
 import { Badge } from "@/app/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/app/components/ui/avatar";
 import { AnimatedSection } from "@/app/components/animated/AnimatedSection";
 import { AnimatedCard } from "@/app/components/animated/AnimatedCard";
 import { NumberCounter } from "@/app/components/animated/NumberCounter";
@@ -13,52 +12,33 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function AboutPage() {
-  const team = [
-    {
-      name: "Alex Johnson",
-      role: "Founder & CEO",
-      initials: "AJ",
-      bio: "15+ years experience in digital marketing and business growth. Former VP of Marketing at Fortune 500 company."
-    },
-    {
-      name: "Sarah Mitchell",
-      role: "Head of Marketing",
-      initials: "SM",
-      bio: "SEO and content marketing expert with proven track record of driving 300%+ organic growth for clients."
-    },
-    {
-      name: "David Chen",
-      role: "Head of Automation",
-      initials: "DC",
-      bio: "Automation architect specializing in AI integration and workflow optimization for scaling businesses."
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Creative Director",
-      initials: "ER",
-      bio: "Award-winning designer with expertise in brand identity and conversion-focused design."
-    }
-  ];
+  const founder = {
+    name: "Anthony Foster",
+    role: "Founder & CEO",
+    initials: "AF",
+    image: "/images/about/founder.webp",
+    bio: "Canadian founder with a Master's from U of T and professional coaching certification. Anthony bridges commercial strategy and marketing execution, helping organizations align their marketing with their full commercial engine for meaningful, long-term growth."
+  };
 
   const values = [
     {
-      title: "Results-Driven",
-      description: "We focus on metrics that matter. Every strategy is designed to deliver measurable ROI and tangible business growth.",
+      title: "Strategic Alignment",
+      description: "We ensure your marketing is aligned with your full commercial engine. Not operating in isolation, but driving meaningful revenue contribution.",
       image: "/images/about/growth-value.png"
     },
     {
       title: "Transparency",
-      description: "Clear communication, honest reporting, and full visibility into our processes and your campaign performance.",
+      description: "Clear communication, honest assessment of your funnel, and full visibility into where inefficiencies exist and how to fix them.",
       image: "/images/about/integrity-value.png"
     },
     {
-      title: "Innovation",
-      description: "We stay ahead of industry trends, leveraging the latest tools and technologies to give you a competitive edge.",
+      title: "Connected Strategy",
+      description: "We look at marketing as part of your complete commercial operation, clarifying how teams work together for long-term growth.",
       image: "/images/about/innovation-value.png"
     },
     {
-      title: "Partnership",
-      description: "We're not just a vendor—we're your growth partner, invested in your long-term success.",
+      title: "True Partnership",
+      description: "We act as a strategic extension of your organization, helping you move forward with the alignment and clarity needed to grow.",
       image: "/images/about/excellence-value.png"
     }
   ];
@@ -86,7 +66,7 @@ export default function AboutPage() {
               variants={staggerItem}
               className="text-xl text-muted-foreground max-w-3xl mx-auto"
             >
-              We're a team of marketing strategists, automation experts, and growth hackers dedicated to helping businesses scale efficiently through integrated marketing and intelligent automation.
+              We're a strategic marketing partner helping organizations close the gap between the strength of their teams and the impact they have in the market. We align marketing with your full commercial engine for meaningful, long-term growth.
             </motion.p>
           </motion.div>
         </div>
@@ -134,7 +114,7 @@ export default function AboutPage() {
             <div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">Our Mission</h2>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                To empower businesses of all sizes to achieve sustainable growth through the perfect blend of strategic marketing and intelligent automation. We believe that every business deserves access to enterprise-level growth strategies and cutting-edge technology—without the enterprise price tag.
+                To help organizations close the gap between the strength of their teams and the impact they have in the market. We act as a strategic extension of your organization, uncovering inefficiencies in your funnel, clarifying how teams work together, and creating connected strategies that support long-term growth.
               </p>
             </div>
           </div>
@@ -183,44 +163,44 @@ export default function AboutPage() {
         </div>
       </AnimatedSection>
 
-      {/* Team Section */}
+      {/* Founder Section */}
       <AnimatedSection className="py-24 px-4 bg-secondary">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <Badge className="mb-4">Leadership Team</Badge>
+            <Badge className="mb-4">Leadership</Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Meet the Team
+              Meet the Founder
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Experienced professionals dedicated to driving your success
+              The vision and expertise driving your success
             </p>
           </div>
 
           <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+            transition={{ duration: 0.5 }}
+            className="max-w-md mx-auto"
           >
-            {team.map((member, index) => (
-              <motion.div key={index} variants={staggerItem} className="h-full">
-                <AnimatedCard className="h-full">
-                  <Card className="h-full text-center border-border bg-accent hover:border-primary transition-colors duration-300">
-                    <CardContent className="h-full pt-6 flex flex-col">
-                      <Avatar className="w-24 h-24 mx-auto mb-4 bg-primary/10 text-primary">
-                        <AvatarFallback className="text-2xl font-bold">
-                          {member.initials}
-                        </AvatarFallback>
-                      </Avatar>
-                      <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                      <p className="text-primary mb-4">{member.role}</p>
-                      <p className="text-sm text-muted-foreground flex-grow">{member.bio}</p>
-                    </CardContent>
-                  </Card>
-                </AnimatedCard>
-              </motion.div>
-            ))}
+            <AnimatedCard className="h-full">
+              <Card className="h-full text-center border-border bg-accent hover:border-primary transition-colors duration-300">
+                <CardContent className="h-full pt-6 flex flex-col">
+                  <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden relative">
+                    <Image
+                      src={founder.image}
+                      alt={founder.name}
+                      fill
+                      className="object-cover object-top"
+                      sizes="128px"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold mb-1">{founder.name}</h3>
+                  <p className="text-primary mb-4">{founder.role}</p>
+                  <p className="text-sm text-muted-foreground flex-grow">{founder.bio}</p>
+                </CardContent>
+              </Card>
+            </AnimatedCard>
           </motion.div>
         </div>
       </AnimatedSection>
