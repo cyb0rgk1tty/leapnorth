@@ -14,7 +14,7 @@ import Image from "next/image";
 export default function AboutPage() {
   const founder = {
     name: "Anthony Foster",
-    role: "Founder & CEO",
+    role: "Founder and CEO",
     initials: "AF",
     image: "/images/about/founder.webp",
     bio: "Canadian founder with a Master's from U of T and professional coaching certification. Anthony bridges commercial strategy and marketing execution, helping organizations align their marketing with their full commercial engine for meaningful, long-term growth."
