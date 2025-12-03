@@ -46,12 +46,12 @@ export default function AboutPage() {
     {
       title: "Strategic Alignment",
       description: "We ensure your marketing is aligned with your full commercial engine. Not operating in isolation, but driving meaningful revenue contribution.",
-      image: "/images/about/growth-value.png"
+      image: "/images/about/growth-value.webp"
     },
     {
       title: "Transparency",
       description: "Clear communication, honest assessment of your funnel, and full visibility into where inefficiencies exist and how to fix them.",
-      image: "/images/about/integrity-value.png"
+      image: "/images/about/integrity-value.webp"
     },
     {
       title: "Connected Strategy",
@@ -61,7 +61,7 @@ export default function AboutPage() {
     {
       title: "True Partnership",
       description: "We act as a strategic extension of your organization, helping you move forward with the alignment and clarity needed to grow.",
-      image: "/images/about/excellence-value.png"
+      image: "/images/about/excellence-value.webp"
     }
   ];
 
@@ -126,12 +126,13 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden">
               <Image
-                src="/images/about/team-collaboration.png"
+                src="/images/about/team-collaboration.webp"
                 alt="Team Collaboration"
                 fill
-                className="object-contain"
+                className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
+              <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-secondary to-transparent" />
             </div>
             <div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">Our Mission</h2>
@@ -163,18 +164,19 @@ export default function AboutPage() {
             {values.map((value, index) => (
               <motion.div key={index} variants={staggerItem}>
                 <AnimatedCard>
-                  <Card className="h-full border-border bg-accent hover:border-primary transition-colors duration-300">
-                    <CardContent className="pt-6">
-                      <div className="relative h-48 mb-6 rounded-lg overflow-hidden">
-                        <Image
-                          src={value.image}
-                          alt={value.title}
-                          fill
-                          className="object-contain"
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                        />
-                      </div>
-                      <CardTitle className="text-2xl mb-4">{value.title}</CardTitle>
+                  <Card className="h-full border-border bg-accent hover:border-primary transition-colors duration-300 overflow-hidden">
+                    <div className="relative h-64 w-full">
+                      <Image
+                        src={value.image}
+                        alt={value.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-accent to-transparent" />
+                    </div>
+                    <CardContent className="pt-4 pb-6">
+                      <CardTitle className="text-2xl mb-3">{value.title}</CardTitle>
                       <p className="text-muted-foreground">{value.description}</p>
                     </CardContent>
                   </Card>

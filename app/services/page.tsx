@@ -157,12 +157,13 @@ export default function ServicesPage() {
             </div>
             <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden">
               <Image
-                src="/images/services/marketing-services.png"
+                src="/images/services/marketing-services.webp"
                 alt="Marketing and Growth Services"
                 fill
-                className="object-contain"
+                className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
+              <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
             </div>
           </div>
 
@@ -205,12 +206,13 @@ export default function ServicesPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
             <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden order-2 md:order-1">
               <Image
-                src="/images/services/automation-services.png"
+                src="/images/services/automation-services.webp"
                 alt="Business Automation Services"
                 fill
-                className="object-contain"
+                className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
+              <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-secondary to-transparent" />
             </div>
             <div className="order-1 md:order-2">
               <Badge className="mb-4">Business Automation</Badge>
