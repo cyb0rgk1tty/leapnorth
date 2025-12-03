@@ -25,6 +25,18 @@ export default function ServicesPage() {
       ]
     },
     {
+      title: "AIO (AI Optimization)",
+      description: "Get your brand cited and recommended by AI systems like ChatGPT, Perplexity, and Google AI Overviews.",
+      features: [
+        "AI search visibility strategy",
+        "Structured data & schema markup",
+        "Citation-worthy content creation",
+        "E-E-A-T & author credibility",
+        "AI citation monitoring & tracking",
+        "Platform-specific optimization"
+      ]
+    },
+    {
       title: "Paid Advertising",
       description: "Maximize ROI with data-driven paid campaigns across Google, Meta, LinkedIn, and more.",
       features: [
