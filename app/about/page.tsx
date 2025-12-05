@@ -27,11 +27,11 @@ export default function AboutPage() {
       bio: "Canadian founder with a Master's from U of T and professional coaching certification. Anthony bridges commercial strategy and marketing execution for meaningful, long-term growth."
     },
     {
-      name: "Stephen Smith",
+      name: "Stefan Roy",
       role: "Chief Marketing Officer",
-      initials: "SS",
+      initials: "SR",
       image: null,
-      bio: "Former head of digital at a leading Canadian agency with 12 years of experience. Stephen builds integrated marketing strategies that connect brand positioning with measurable outcomes."
+      bio: "Former head of digital at a leading Canadian agency with 12 years of experience. Stefan builds integrated marketing strategies that connect brand positioning with measurable outcomes."
     },
     {
       name: "Michelle Chan",
