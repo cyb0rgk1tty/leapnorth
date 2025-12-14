@@ -24,13 +24,13 @@ export default function AboutPage() {
       role: "Founder and CEO",
       initials: "AF",
       image: "/images/about/founder.webp",
-      bio: "Canadian founder with a Master's from U of T and professional coaching certification. Anthony bridges commercial strategy and marketing execution for meaningful, long-term growth."
+      bio: "Canadian founder with a Master of Arts from the University of Toronto and award-winning Master's Scholar. Anthony bridges commercial strategy and marketing execution for meaningful, long-term growth."
     },
     {
       name: "Stefan Roy",
       role: "Chief Marketing Officer",
       initials: "SR",
-      image: null,
+      image: "/images/about/cmo.webp",
       bio: "Former head of digital at a leading Canadian agency with 12 years of experience. Stefan builds integrated marketing strategies that connect brand positioning with measurable outcomes."
     },
     {
