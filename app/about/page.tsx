@@ -37,7 +37,7 @@ export default function AboutPage() {
       name: "Michelle Chan",
       role: "Chief Operating Officer",
       initials: "MC",
-      image: null,
+      image: "/images/about/coo.webp",
       bio: "Operations leader with a background in scaling service businesses. Michelle ensures our delivery processes run smoothly, bringing structure and efficiency to every client engagement."
     }
   ];
