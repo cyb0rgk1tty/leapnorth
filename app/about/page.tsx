@@ -20,23 +20,23 @@ export default function AboutPage() {
 
   const team = [
     {
-      name: "Anthony Foster",
+      name: "Anthony",
       role: "Founder and CEO",
-      initials: "AF",
+      initials: "A",
       image: "/images/about/founder.webp",
       bio: "Canadian founder with a Master of Arts from the University of Toronto and award-winning Master's Scholar. Anthony bridges commercial strategy and marketing execution for meaningful, long-term growth."
     },
     {
-      name: "Stefan Roy",
+      name: "Stefan",
       role: "Chief Marketing Officer",
-      initials: "SR",
+      initials: "S",
       image: "/images/about/cmo.webp",
       bio: "Former head of digital at a leading Canadian agency with 12 years of experience. Stefan builds integrated marketing strategies that connect brand positioning with measurable outcomes."
     },
     {
-      name: "Michelle Chan",
+      name: "Michelle",
       role: "Chief Operating Officer",
-      initials: "MC",
+      initials: "M",
       image: "/images/about/coo.webp",
       bio: "Operations leader with a background in scaling service businesses. Michelle ensures our delivery processes run smoothly, bringing structure and efficiency to every client engagement."
     }
