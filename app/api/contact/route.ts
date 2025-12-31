@@ -7,6 +7,8 @@ const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   company: z.string().optional(),
+  phone: z.string().optional(),
+  service: z.string().optional(),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
@@ -159,6 +161,28 @@ export async function POST(request: NextRequest) {
                 : ""
             }
 
+            ${
+              validatedData.phone
+                ? `
+            <div class="field">
+              <div class="label">Phone</div>
+              <div class="value">${validatedData.phone}</div>
+            </div>
+            `
+                : ""
+            }
+
+            ${
+              validatedData.service
+                ? `
+            <div class="field">
+              <div class="label">Service Interest</div>
+              <div class="value">${validatedData.service}</div>
+            </div>
+            `
+                : ""
+            }
+
             <div class="field">
               <div class="label">Message</div>
               <div class="message-box">${validatedData.message}</div>
@@ -185,7 +209,7 @@ New Contact Form Submission
 
 Name: ${validatedData.name}
 Email: ${validatedData.email}
-${validatedData.company ? `Company: ${validatedData.company}\n` : ""}
+${validatedData.company ? `Company: ${validatedData.company}\n` : ""}${validatedData.phone ? `Phone: ${validatedData.phone}\n` : ""}${validatedData.service ? `Service Interest: ${validatedData.service}\n` : ""}
 Message:
 ${validatedData.message}
 
